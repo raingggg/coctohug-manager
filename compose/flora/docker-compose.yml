@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  coctohug-flora:
+    image: raingggg/coctohug-flora:develop
+    container_name: coctohug-flora
+    restart: always
+    networks:
+      - coctohug-network
+    volumes:
+      - ~/.coctohug:/root/.coctohug
+      - ~/.coctohug-flora:/root/.chia
+      - /d1:/plots1
+      - /d2:/plots2
+      - /d3:/plots3
+    environment:
+      - TZ=Asia/Shanghai
+      - mode=fullnode
+      - controller_address=192.168.123.23
+      - worker_address=192.168.123.23
+      - plots_dir=/plots1:/plots2:/plots3
+    ports:
+      - 12632:12632
+      - 18644:18644
+      - 18647:18647
+
+networks:
+  coctohug-network:
+    name: coctohug-app-network
+

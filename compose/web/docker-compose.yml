@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  coctohug-web:
+    image: raingggg/coctohug-web:develop
+    container_name: coctohug-web
+    restart: always
+    networks:
+      - coctohug-network
+    volumes:
+      - ~/.coctohug:/root/.coctohug
+      - ~/.coctohug-web:/root/.coctohug-web
+    environment:
+      - TZ=Asia/Shanghai
+      - mode=fullnode
+      - controller_address=192.168.123.23
+      - worker_address=192.168.123.23
+      - plots_dir=/plots1:/plots2:/plots3
+    ports:
+      - 12630:12630
+
+networks:
+  coctohug-network:
+    name: coctohug-app-network
+

@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  coctohug-silicoin:
+    image: raingggg/coctohug-silicoin:develop
+    container_name: coctohug-silicoin
+    restart: always
+    networks:
+      - coctohug-network
+    volumes:
+      - ~/.coctohug:/root/.coctohug
+      - ~/.coctohug-silicoin:/root/.chia
+      - /d1:/plots1
+      - /d2:/plots2
+      - /d3:/plots3
+    environment:
+      - TZ=Asia/Shanghai
+      - mode=fullnode
+      - controller_address=192.168.123.23
+      - worker_address=192.168.123.23
+      - plots_dir=/plots1:/plots2:/plots3
+    ports:
+      - 12645:12645
+      - 22222:22222
+      - 10447:11447
+
+networks:
+  coctohug-network:
+    name: coctohug-app-network
+

@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  coctohug-hddcoin:
+    image: raingggg/coctohug-hddcoin:develop
+    container_name: coctohug-hddcoin
+    restart: always
+    networks:
+      - coctohug-network
+    volumes:
+      - ~/.coctohug:/root/.coctohug
+      - ~/.coctohug-hddcoin:/root/.chia
+      - /d1:/plots1
+      - /d2:/plots2
+      - /d3:/plots3
+    environment:
+      - TZ=Asia/Shanghai
+      - mode=fullnode
+      - controller_address=192.168.123.23
+      - worker_address=192.168.123.23
+      - plots_dir=/plots1:/plots2:/plots3
+    ports:
+      - 12651:12651
+      - 28444:28444
+      - 28447:28447
+
+networks:
+  coctohug-network:
+    name: coctohug-app-network
+

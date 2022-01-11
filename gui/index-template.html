@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= __('general.title') %>
+  </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='./stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+  We are using Node.js <span id="node-version"></span>,
+  Chromium <span id="chrome-version"></span>,
+  and Electron <span id="electron-version"></span>.
+
+  <div class="page-wrapper app-config">
+    <div class="container">
+      <div class="mode config-row">
+        <div>
+          <%= __('appcoinfig.modes') %>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
+            <%= __('appcoinfig.fullnode_mode') %>
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
+            <%= __('appcoinfig.harvester_mode') %>
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
+            <%= __('appcoinfig.wallet_mode') %>
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
+            <%= __('appcoinfig.farmer_mode') %>
+          </span>
+        </div>
+      </div>
+      <div class="row ips input-group  config-row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <%= __('appcoinfig.contoller_ip') %>
+            </span>
+            <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
+          </div>
+        </div>
+        <div class="col-6 visually-hidden" id='harvesterIPCol'>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <%= __('appcoinfig.harvester_ip') %>
+            </span>
+            <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
+          </div>
+        </div>
+      </div>
+      <div class="row forks config-row">
+        <div class="col-12">
+          <div>
+            <span>
+              <%= __('appcoinfig.forks_mine') %>
+            </span>
+            <span>
+              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
+                <%= __('appcoinfig.select_un_all') %>
+              </button>
+            </span>
+          </div>
+          <div class="forks-names row">
+            <% chainNames.forEach(function(cn, cnIndex){ %>
+              <div class="col-2">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="<%= cn %>">
+                  <%= cn %>
+                </span>
+                <span class="fork-name-number">
+                  <%= cnIndex + 1 %>
+                </span>
+              </div>
+              <% }); %>
+          </div>
+        </div>
+      </div>
+      <div class="row config-row">
+        <div class="alert alert-danger" role="alert" id="allChecks">
+          <div class="alert-item visually-hidden" id="missingControllerIP">
+            <%= __('appcoinfig.missing_controller_ip') %>
+          </div>
+          <div class="alert-item visually-hidden" id="missingHarvesterIP">
+            <%= __('appcoinfig.missing_harvester_ip') %>
+          </div>
+          <div class="alert-item visually-hidden" id="missingFork">
+            <%= __('appcoinfig.missing_fork') %>
+          </div>
+          <div class="alert-item visually-hidden" id="missingDisk">
+            <%= __('appcoinfig.missing_disk') %>
+          </div>
+        </div>
+      </div>
+      <div class="row disks">
+        <div class="col-12" id='diskVolumeCol'>
+          <%= __('appcoinfig.disk_header') %>
+            <div>
+              <textarea id="diskVolumesTextarea" class="config-item"
+                placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row generate-buttons-row">
+        <div class="col-6">
+          <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
+            <%= __('appcoinfig.download_generate_btn') %>
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
+            <%= __('appcoinfig.generate_btn') %>
+          </button>
+        </div>
+      </div>
+      <div class="row docker-compose">
+        <div class="col-12">
+          <div>
+            <textarea id="dockerComposeTextarea" class="visually-hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+  <script src="./libs/jquery-3.6.0.min.js"></script>
+  <script src="./libs/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
