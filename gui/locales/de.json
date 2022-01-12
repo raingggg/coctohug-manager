@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "Controller-IP",
+  "appcoinfig.disk_header": "Festplattenvolumes (eine Festplatte pro Zeile, legen Sie alle Ihre Festplatten/Ordner, die geplottete Dateien enthalten, hier ab):",
+  "appcoinfig.download_generate_btn": "Gut organisiert docker-compose.yml herunterladen",
+  "appcoinfig.farmer_mode": "Nur Bergbau oder Farmer (verfügt über 2+ Computer, Bergbau ohne den Wallet-Dienst zu starten)",
+  "appcoinfig.forks_mine": "Ich würde gerne auf diesen Blockchains abbauen (die maximale Anzahl von Blockchains, die Ihr Computer unterstützen kann, entspricht dem Gesamtspeicher geteilt durch 2G - wählen Sie also nicht alle aus, es sei denn, Ihr Arbeitsspeicher liegt über 64G):",
+  "appcoinfig.fullnode_mode": "Standard Fullnode Farmer Mining (1 Standalone-Computer mit Fullnode und Wallet für das Mining)",
+  "appcoinfig.generate_btn": "Docker-compose.yml generieren",
+  "appcoinfig.harvester_ip": "Harvester-IP",
+  "appcoinfig.harvester_mode": "Harvester (hat 2+ Computer, Harvester müssen sich mit einem Farmer-Computer verbinden)",
+  "appcoinfig.missing_controller_ip": "Fehlende Controller-IP-Adresse",
+  "appcoinfig.missing_disk": "Bitte fügen Sie mindestens einen Datenträger hinzu",
+  "appcoinfig.missing_fork": "Bitte wählen Sie mindestens eine Gabel",
+  "appcoinfig.missing_harvester_ip": "Fehlende Harvester-IP-Adresse",
+  "appcoinfig.modes": "Wählen Sie den Modus, der zu Ihnen passt:",
+  "appcoinfig.select_un_all": "Alle auswählen / Alle abwählen",
+  "appcoinfig.wallet_mode": "Nur Brieftasche (hat 2+ Computer, Brieftasche muss mit einem Farmer-Computer verbunden werden)",
   "general.title": "Coctohug"
 }

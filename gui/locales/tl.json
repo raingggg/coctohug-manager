@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "Contoller IP",
+  "appcoinfig.disk_header": "Mga Volume ng Disk(isang disk bawat linya, ilagay ang lahat ng iyong mga disk/folder na naglalaman ng mga naka-plot na file dito):",
+  "appcoinfig.download_generate_btn": "I-download ang Well Organized docker-compose.yml",
+  "appcoinfig.farmer_mode": "Pagmimina o magsasaka lamang(may 2+ computer, pagmimina nang hindi sinimulan ang serbisyo ng wallet)",
+  "appcoinfig.forks_mine": "Gusto kong magmina sa mga blockchain na ito (ang maximum na bilang ng mga blockchain na maaaring suportahan ng iyong computer ay katumbas ng kabuuang memory na hinati sa 2G - kaya huwag piliin ang lahat maliban kung ang iyong memorya ay higit sa 64G):",
+  "appcoinfig.fullnode_mode": "Karaniwang fullnode farmer mining(1 standalone na computer na may fullnode at wallet para sa pagmimina)",
+  "appcoinfig.generate_btn": "Bumuo ng docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP ng Harvester",
+  "appcoinfig.harvester_mode": "Harvester(may 2+ computer, kailangang kumonekta ang harvester sa isang computer ng magsasaka)",
+  "appcoinfig.missing_controller_ip": "Nawawala ang controller IP address",
+  "appcoinfig.missing_disk": "Mangyaring magdagdag ng kahit isang volume na disk",
+  "appcoinfig.missing_fork": "Mangyaring pumili ng hindi bababa sa isang tinidor",
+  "appcoinfig.missing_harvester_ip": "Nawawala ang harvester IP address",
+  "appcoinfig.modes": "Piliin ang mode na nababagay sa iyo:",
+  "appcoinfig.select_un_all": "Piliin ang Lahat / I-unselect ang Lahat",
+  "appcoinfig.wallet_mode": "Wallet lang(may 2+ computer, kailangang kumonekta ang wallet sa isang farmer computer)",
   "general.title": "Coctohug"
 }

@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP do controlador",
+  "appcoinfig.disk_header": "Volumes do disco (un disco por liña, coloque aquí todos os seus discos/carpetas que conteñan ficheiros trazados):",
+  "appcoinfig.download_generate_btn": "Descarga ben organizado docker-compose.yml",
+  "appcoinfig.farmer_mode": "Só para minería ou agricultor (ten máis de 2 ordenadores, minería sen iniciar o servizo de carteira)",
+  "appcoinfig.forks_mine": "Gustaríame minar nestas cadeas de bloques (o número máximo de cadeas de bloques que pode soportar o teu ordenador é igual á memoria total dividida por 2G, polo que non as selecciones todas a menos que a túa memoria sexa superior a 64G):",
+  "appcoinfig.fullnode_mode": "Minería de agricultores de fullnode estándar (1 ordenador autónomo con fullnode e carteira para minería)",
+  "appcoinfig.generate_btn": "Xerar docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP da colleitadora",
+  "appcoinfig.harvester_mode": "Harvester (ten máis de 2 ordenadores, as colleitadoras deben conectarse a unha computadora do agricultor)",
+  "appcoinfig.missing_controller_ip": "Falta o enderezo IP do controlador",
+  "appcoinfig.missing_disk": "Engade polo menos un disco de volume",
+  "appcoinfig.missing_fork": "Escolle polo menos un garfo",
+  "appcoinfig.missing_harvester_ip": "Falta o enderezo IP da colleitadora",
+  "appcoinfig.modes": "Escolle o modo que che conveña:",
+  "appcoinfig.select_un_all": "Seleccionar todo / Deseleccionar todo",
+  "appcoinfig.wallet_mode": "Só carteira (ten máis de 2 ordenadores, a carteira debe conectarse a un ordenador do agricultor)",
   "general.title": "Coctoabrazo"
 }

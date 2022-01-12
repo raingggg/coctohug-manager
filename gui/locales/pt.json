@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP do controlador",
+  "appcoinfig.disk_header": "Volumes de disco (um disco por linha, coloque todos os seus discos/pastas que contém arquivos plotados aqui):",
+  "appcoinfig.download_generate_btn": "Baixe o docker-compose.yml Bem Organizado",
+  "appcoinfig.farmer_mode": "Mineração ou agricultor apenas (tem mais de 2 computadores, mineração sem iniciar o serviço de carteira)",
+  "appcoinfig.forks_mine": "Eu gostaria de minerar nesses blockchains (o número máximo de blockchains que seu computador pode suportar é igual ao total de memória dividido por 2G - portanto, não selecione todos, a menos que sua memória esteja acima de 64G):",
+  "appcoinfig.fullnode_mode": "Mineração de agricultores fullnode padrão (1 computador autônomo com fullnode e carteira para mineração)",
+  "appcoinfig.generate_btn": "Gerar docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP da colheitadeira",
+  "appcoinfig.harvester_mode": "Harvester (tem mais de 2 computadores, as colheitadeiras precisam se conectar a um computador do agricultor)",
+  "appcoinfig.missing_controller_ip": "Endereço IP do controlador ausente",
+  "appcoinfig.missing_disk": "Adicione pelo menos um disco de volume",
+  "appcoinfig.missing_fork": "Escolha pelo menos um garfo",
+  "appcoinfig.missing_harvester_ip": "Endereço IP do harvester ausente",
+  "appcoinfig.modes": "Escolha o modo que mais lhe convier:",
+  "appcoinfig.select_un_all": "Selecionar tudo/desmarcar tudo",
+  "appcoinfig.wallet_mode": "Carteira apenas (tem mais de 2 computadores, a carteira precisa se conectar a um computador do agricultor)",
   "general.title": "Coctohug"
 }

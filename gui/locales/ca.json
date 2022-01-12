@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP del controlador",
+  "appcoinfig.disk_header": "Volums de disc (un disc per línia, poseu aquí tots els vostres discs/carpetes que continguin fitxers dibuixats):",
+  "appcoinfig.download_generate_btn": "Baixeu docker-compose.yml ben organitzat",
+  "appcoinfig.farmer_mode": "Només per a mineria o agricultor (té més de 2 ordinadors, mineria sense iniciar el servei de cartera)",
+  "appcoinfig.forks_mine": "M'agradaria explotar aquestes cadenes de blocs (el nombre màxim de cadenes de blocs que pot suportar el vostre ordinador és igual a la memòria total dividida per 2G, així que no seleccioneu-les totes tret que la vostra memòria sigui superior a 64G):",
+  "appcoinfig.fullnode_mode": "Mineria d'agricultors de fullnode estàndard (1 ordinador autònom amb fullnode i cartera per a la mineria)",
+  "appcoinfig.generate_btn": "Genereu docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP de la recol·lectora",
+  "appcoinfig.harvester_mode": "Harvester (té més de 2 ordinadors, les recol·lectores s'han de connectar a un ordinador granger)",
+  "appcoinfig.missing_controller_ip": "Falta l'adreça IP del controlador",
+  "appcoinfig.missing_disk": "Si us plau, afegiu almenys un disc de volum",
+  "appcoinfig.missing_fork": "Si us plau, trieu almenys una forquilla",
+  "appcoinfig.missing_harvester_ip": "Falta l'adreça IP de la recol·lectora",
+  "appcoinfig.modes": "Trieu el mode que més us convingui:",
+  "appcoinfig.select_un_all": "Seleccioneu-ho tot / Desseleccioneu-ho tot",
+  "appcoinfig.wallet_mode": "Només cartera (té més de 2 ordinadors, la cartera s'ha de connectar a un ordinador granger)",
   "general.title": "Coctohug"
 }

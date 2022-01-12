@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <link href="./styles.css" rel="stylesheet">
   <title>
     کوکتوگ
   </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self'; script-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
@@ -16,8 +18,211 @@
   We are using Node.js <span id="node-version"></span>,
   Chromium <span id="chrome-version"></span>,
   and Electron <span id="electron-version"></span>.
+
+  <div class="page-wrapper app-config">
+    <div class="container">
+      <div class="mode config-row">
+        <div>
+          حالت مناسب خود را انتخاب کنید:
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
+            استخراج استاندارد فول نود کشاورز (1 کامپیوتر مستقل با فول نود و کیف پول برای استخراج)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
+            Harvester (دارای بیش از 2 کامپیوتر، دروگرها باید به یک کامپیوتر کشاورز متصل شوند)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
+            فقط کیف پول (دارای 2+ رایانه، کیف پول باید به یک رایانه کشاورز متصل شود)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
+            فقط ماینینگ یا کشاورز (دارای 2+ رایانه، استخراج بدون شروع سرویس کیف پول)
+          </span>
+        </div>
+      </div>
+      <div class="row ips input-group  config-row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              IP کنترلر
+            </span>
+            <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
+          </div>
+        </div>
+        <div class="col-6 visually-hidden" id='harvesterIPCol'>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              IP Harvester
+            </span>
+            <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
+          </div>
+        </div>
+      </div>
+      <div class="row forks config-row">
+        <div class="col-12">
+          <div>
+            <span>
+              من می خواهم روی این بلاک چین ها استخراج کنم (حداکثر تعداد بلاک چین هایی که رایانه شما می تواند پشتیبانی کند برابر است با کل حافظه تقسیم بر 2G - بنابراین همه را انتخاب نکنید مگر اینکه حافظه شما بالاتر از 64G باشد):
+            </span>
+            <span>
+              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
+                همه را انتخاب کنید / همه را لغو انتخاب کنید
+              </button>
+            </span>
+          </div>
+          <div class="forks-names row">
+            
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="btcgreen">
+                  btcgreen
+                </span>
+                <span class="fork-name-number">
+                  1
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="ethgreen">
+                  ethgreen
+                </span>
+                <span class="fork-name-number">
+                  2
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="flax">
+                  flax
+                </span>
+                <span class="fork-name-number">
+                  3
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="hddcoin">
+                  hddcoin
+                </span>
+                <span class="fork-name-number">
+                  4
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="maize">
+                  maize
+                </span>
+                <span class="fork-name-number">
+                  5
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="shibgreen">
+                  shibgreen
+                </span>
+                <span class="fork-name-number">
+                  6
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="skynet">
+                  skynet
+                </span>
+                <span class="fork-name-number">
+                  7
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="stor">
+                  stor
+                </span>
+                <span class="fork-name-number">
+                  8
+                </span>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+      <div class="row config-row">
+        <div class="alert alert-danger" role="alert" id="allChecks">
+          <div class="alert-item visually-hidden" id="missingControllerIP">
+            آدرس IP کنترلر وجود ندارد
+          </div>
+          <div class="alert-item visually-hidden" id="missingHarvesterIP">
+            آدرس IP دروگر گم شده است
+          </div>
+          <div class="alert-item visually-hidden" id="missingFork">
+            لطفا حداقل یک چنگال را انتخاب کنید
+          </div>
+          <div class="alert-item visually-hidden" id="missingDisk">
+            لطفا حداقل یک دیسک حجم اضافه کنید
+          </div>
+        </div>
+      </div>
+      <div class="row disks">
+        <div class="col-12" id='diskVolumeCol'>
+          حجم دیسک (یک دیسک در هر خط، همه دیسک‌ها/پوشه‌های خود را که حاوی فایل‌های رسم‌شده هستند در اینجا قرار دهید):
+            <div>
+              <textarea id="diskVolumesTextarea" class="config-item"
+                placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row generate-buttons-row">
+        <div class="col-6">
+          <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
+            دانلود Well Organized docker-compose.yml
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
+            docker-compose.yml را ایجاد کنید
+          </button>
+        </div>
+      </div>
+      <div class="row docker-compose">
+        <div class="col-12">
+          <div>
+            <textarea id="dockerComposeTextarea" class="visually-hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="ttt">test</button>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
+  <script src="../libs/jquery-3.6.0.min.js"></script>
+  <script src="../libs/bootstrap.bundle.min.js"></script>
+  <script src="../renderer.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

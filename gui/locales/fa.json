@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP کنترلر",
+  "appcoinfig.disk_header": "حجم دیسک (یک دیسک در هر خط، همه دیسک‌ها/پوشه‌های خود را که حاوی فایل‌های رسم‌شده هستند در اینجا قرار دهید):",
+  "appcoinfig.download_generate_btn": "دانلود Well Organized docker-compose.yml",
+  "appcoinfig.farmer_mode": "فقط ماینینگ یا کشاورز (دارای 2+ رایانه، استخراج بدون شروع سرویس کیف پول)",
+  "appcoinfig.forks_mine": "من می خواهم روی این بلاک چین ها استخراج کنم (حداکثر تعداد بلاک چین هایی که رایانه شما می تواند پشتیبانی کند برابر است با کل حافظه تقسیم بر 2G - بنابراین همه را انتخاب نکنید مگر اینکه حافظه شما بالاتر از 64G باشد):",
+  "appcoinfig.fullnode_mode": "استخراج استاندارد فول نود کشاورز (1 کامپیوتر مستقل با فول نود و کیف پول برای استخراج)",
+  "appcoinfig.generate_btn": "docker-compose.yml را ایجاد کنید",
+  "appcoinfig.harvester_ip": "IP Harvester",
+  "appcoinfig.harvester_mode": "Harvester (دارای بیش از 2 کامپیوتر، دروگرها باید به یک کامپیوتر کشاورز متصل شوند)",
+  "appcoinfig.missing_controller_ip": "آدرس IP کنترلر وجود ندارد",
+  "appcoinfig.missing_disk": "لطفا حداقل یک دیسک حجم اضافه کنید",
+  "appcoinfig.missing_fork": "لطفا حداقل یک چنگال را انتخاب کنید",
+  "appcoinfig.missing_harvester_ip": "آدرس IP دروگر گم شده است",
+  "appcoinfig.modes": "حالت مناسب خود را انتخاب کنید:",
+  "appcoinfig.select_un_all": "همه را انتخاب کنید / همه را لغو انتخاب کنید",
+  "appcoinfig.wallet_mode": "فقط کیف پول (دارای 2+ رایانه، کیف پول باید به یک رایانه کشاورز متصل شود)",
   "general.title": "کوکتوگ"
 }

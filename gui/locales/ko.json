@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "컨트롤러 IP",
+  "appcoinfig.disk_header": "디스크 볼륨(한 줄에 하나의 디스크, 플롯된 파일이 포함된 모든 디스크/폴더를 여기에 넣으십시오):",
+  "appcoinfig.download_generate_btn": "잘 정리된 docker-compose.yml 다운로드",
+  "appcoinfig.farmer_mode": "마이닝 또는 파머 전용(2대 이상의 컴퓨터 보유, 지갑 서비스 시작 없이 마이닝)",
+  "appcoinfig.forks_mine": "다음 블록체인에서 채굴하고 싶습니다(컴퓨터가 지원할 수 있는 최대 블록체인 수는 총 메모리를 2G로 나눈 값과 같습니다. 따라서 메모리가 64G를 초과하지 않는 한 모두 선택하지 마십시오):",
+  "appcoinfig.fullnode_mode": "표준 풀노드 파머 마이닝(풀노드가 있는 독립형 컴퓨터 1대 및 마이닝용 지갑)",
+  "appcoinfig.generate_btn": "docker-compose.yml 생성",
+  "appcoinfig.harvester_ip": "수확기 IP",
+  "appcoinfig.harvester_mode": "수확기(2대 이상의 컴퓨터 보유, 수확기는 하나의 농부 컴퓨터에 연결해야 함)",
+  "appcoinfig.missing_controller_ip": "컨트롤러 IP 주소 누락",
+  "appcoinfig.missing_disk": "볼륨 디스크를 하나 이상 추가하십시오.",
+  "appcoinfig.missing_fork": "포크를 하나 이상 선택하세요.",
+  "appcoinfig.missing_harvester_ip": "수확기 IP 주소 누락",
+  "appcoinfig.modes": "적합한 모드를 선택하십시오.",
+  "appcoinfig.select_un_all": "모두 선택 / 모두 선택 취소",
+  "appcoinfig.wallet_mode": "지갑 전용(2대 이상의 컴퓨터 보유, 지갑은 농부 컴퓨터 1대에 연결해야 함)",
   "general.title": "콕토허그"
 }

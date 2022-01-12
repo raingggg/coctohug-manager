@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP-ul controlorului",
+  "appcoinfig.disk_header": "Volume de disc (un disc pe linie, puneți aici toate discurile/folderele care conțin fișiere trasate):",
+  "appcoinfig.download_generate_btn": "Descărcați bine organizat docker-compose.yml",
+  "appcoinfig.farmer_mode": "Doar minerit sau fermier (are peste 2 computere, minerit fără a porni serviciul de portofel)",
+  "appcoinfig.forks_mine": "Aș dori să mine pe aceste blockchain-uri (numărul maxim de blockchain-uri pe care computerul dvs. le poate suporta este egal cu memoria totală împărțită la 2G - așa că nu selectați toate decât dacă memoria dvs. este peste 64G):",
+  "appcoinfig.fullnode_mode": "Exploatare standard fullnode fermier (1 computer autonom cu fullnode și portofel pentru minerit)",
+  "appcoinfig.generate_btn": "Generați docker-compose.yml",
+  "appcoinfig.harvester_ip": "Harvester IP",
+  "appcoinfig.harvester_mode": "Harvester (are 2+ computere, recoltatoarele trebuie să se conecteze la un computer fermier)",
+  "appcoinfig.missing_controller_ip": "Lipsește adresa IP a controlerului",
+  "appcoinfig.missing_disk": "Vă rugăm să adăugați cel puțin un disc de volum",
+  "appcoinfig.missing_fork": "Vă rugăm să alegeți cel puțin o furculiță",
+  "appcoinfig.missing_harvester_ip": "Lipsește adresa IP a recoltei",
+  "appcoinfig.modes": "Alegeți modul care vi se potrivește:",
+  "appcoinfig.select_un_all": "Selectați toate / Deselectați toate",
+  "appcoinfig.wallet_mode": "Numai portofel (are 2+ computere, portofelul trebuie să se conecteze la un computer fermier)",
   "general.title": "Coctohug"
 }

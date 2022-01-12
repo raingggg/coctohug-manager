@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP du contrôleur",
+  "appcoinfig.disk_header": "Volumes de disque (un disque par ligne, placez tous vos disques/dossiers contenant les fichiers tracés ici) :",
+  "appcoinfig.download_generate_btn": "Télécharger docker-compose.yml bien organisé",
+  "appcoinfig.farmer_mode": "Exploitation minière ou agriculteur uniquement (possède plus de 2 ordinateurs, exploitation minière sans démarrer le service de portefeuille)",
+  "appcoinfig.forks_mine": "Je voudrais exploiter ces blockchains (le nombre maximum de blockchains que votre ordinateur peut prendre en charge est égal à la mémoire totale divisée par 2G - donc ne sélectionnez pas tout sauf si votre mémoire est supérieure à 64G) :",
+  "appcoinfig.fullnode_mode": "Exploitation minière de fermier fullnode standard (1 ordinateur autonome avec fullnode et portefeuille pour l'exploitation minière)",
+  "appcoinfig.generate_btn": "Générer docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP de la moissonneuse",
+  "appcoinfig.harvester_mode": "Moissonneuse (a 2+ ordinateurs, les moissonneuses doivent se connecter à un ordinateur d'agriculteur)",
+  "appcoinfig.missing_controller_ip": "Adresse IP du contrôleur manquante",
+  "appcoinfig.missing_disk": "Veuillez ajouter au moins un disque de volume",
+  "appcoinfig.missing_fork": "Veuillez choisir au moins une fourchette",
+  "appcoinfig.missing_harvester_ip": "Adresse IP de la moissonneuse manquante",
+  "appcoinfig.modes": "Choisissez le mode qui vous convient :",
+  "appcoinfig.select_un_all": "Tout sélectionner / Tout désélectionner",
+  "appcoinfig.wallet_mode": "Portefeuille uniquement (a plus de 2 ordinateurs, le portefeuille doit se connecter à un ordinateur d'agriculteur)",
   "general.title": "Coctohug"
 }

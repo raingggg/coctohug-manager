@@ -1,3 +1,19 @@
 {
-  "general.title": "椰子虎"
+  "appcoinfig.contoller_ip": "控制器 IP",
+  "appcoinfig.disk_header": "磁盘卷（每行一个磁盘，将所有包含绘图文件的磁盘/文件夹放在此处）：",
+  "appcoinfig.download_generate_btn": "下载组织良好的 docker-compose.yml",
+  "appcoinfig.farmer_mode": "仅挖矿或农民（拥有2台以上计算机，无需启动钱包服务即可挖矿）",
+  "appcoinfig.forks_mine": "我想在这些区块链上挖矿（你的计算机可以支持的最大区块链数等于总内存除以 2G - 所以不要全选，除非你的内存超过 64G）：",
+  "appcoinfig.fullnode_mode": "标准全节点农民挖矿（1 台带全节点和钱包的独立计算机用于挖矿）",
+  "appcoinfig.generate_btn": "生成 docker-compose.yml",
+  "appcoinfig.harvester_ip": "收割机 IP",
+  "appcoinfig.harvester_mode": "收割机（有2台以上电脑，收割机需要连接一台农民电脑）",
+  "appcoinfig.missing_controller_ip": "缺少控制器 IP 地址",
+  "appcoinfig.missing_disk": "请至少添加一个卷盘",
+  "appcoinfig.missing_fork": "请至少选择一个叉子",
+  "appcoinfig.missing_harvester_ip": "缺少收割机 IP 地址",
+  "appcoinfig.modes": "选择适合您的模式：",
+  "appcoinfig.select_un_all": "全选/取消全选",
+  "appcoinfig.wallet_mode": "仅限钱包（有2台以上电脑，钱包需要连接一台农民电脑）",
+  "general.title": "椰子"
 }

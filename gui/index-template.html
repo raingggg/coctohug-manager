@@ -3,14 +3,14 @@
 
 <head>
   <title>
-    <%= __('general.title') %>
+    <%= localeData['general.title'] %>
   </title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self'; script-src 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./stylesheets/bootstrap.min.css" />
-  <link rel='stylesheet' href='./stylesheets/style.css' />
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
@@ -23,30 +23,30 @@
     <div class="container">
       <div class="mode config-row">
         <div>
-          <%= __('appcoinfig.modes') %>
+          <%= localeData['appcoinfig.modes'] %>
         </div>
         <div>
           <span class="check-item-with-label">
             <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
-            <%= __('appcoinfig.fullnode_mode') %>
+            <%= localeData['appcoinfig.fullnode_mode'] %>
           </span>
         </div>
         <div>
           <span class="check-item-with-label">
             <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
-            <%= __('appcoinfig.harvester_mode') %>
+            <%= localeData['appcoinfig.harvester_mode'] %>
           </span>
         </div>
         <div>
           <span class="check-item-with-label">
             <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
-            <%= __('appcoinfig.wallet_mode') %>
+            <%= localeData['appcoinfig.wallet_mode'] %>
           </span>
         </div>
         <div>
           <span class="check-item-with-label">
             <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
-            <%= __('appcoinfig.farmer_mode') %>
+            <%= localeData['appcoinfig.farmer_mode'] %>
           </span>
         </div>
       </div>
@@ -54,7 +54,7 @@
         <div class="col-6">
           <div class="input-group mb-3">
             <span class="input-group-text">
-              <%= __('appcoinfig.contoller_ip') %>
+              <%= localeData['appcoinfig.contoller_ip'] %>
             </span>
             <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
           </div>
@@ -62,7 +62,7 @@
         <div class="col-6 visually-hidden" id='harvesterIPCol'>
           <div class="input-group mb-3">
             <span class="input-group-text">
-              <%= __('appcoinfig.harvester_ip') %>
+              <%= localeData['appcoinfig.harvester_ip'] %>
             </span>
             <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
           </div>
@@ -72,17 +72,17 @@
         <div class="col-12">
           <div>
             <span>
-              <%= __('appcoinfig.forks_mine') %>
+              <%= localeData['appcoinfig.forks_mine'] %>
             </span>
             <span>
               <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
-                <%= __('appcoinfig.select_un_all') %>
+                <%= localeData['appcoinfig.select_un_all'] %>
               </button>
             </span>
           </div>
           <div class="forks-names row">
             <% chainNames.forEach(function(cn, cnIndex){ %>
-              <div class="col-2">
+              <div class="col-3">
                 <span class="check-item-with-label">
                   <input type="checkbox" class="form-check-input config-item" name="fork-name" value="<%= cn %>">
                   <%= cn %>
@@ -98,22 +98,22 @@
       <div class="row config-row">
         <div class="alert alert-danger" role="alert" id="allChecks">
           <div class="alert-item visually-hidden" id="missingControllerIP">
-            <%= __('appcoinfig.missing_controller_ip') %>
+            <%= localeData['appcoinfig.missing_controller_ip'] %>
           </div>
           <div class="alert-item visually-hidden" id="missingHarvesterIP">
-            <%= __('appcoinfig.missing_harvester_ip') %>
+            <%= localeData['appcoinfig.missing_harvester_ip'] %>
           </div>
           <div class="alert-item visually-hidden" id="missingFork">
-            <%= __('appcoinfig.missing_fork') %>
+            <%= localeData['appcoinfig.missing_fork'] %>
           </div>
           <div class="alert-item visually-hidden" id="missingDisk">
-            <%= __('appcoinfig.missing_disk') %>
+            <%= localeData['appcoinfig.missing_disk'] %>
           </div>
         </div>
       </div>
       <div class="row disks">
         <div class="col-12" id='diskVolumeCol'>
-          <%= __('appcoinfig.disk_header') %>
+          <%= localeData['appcoinfig.disk_header'] %>
             <div>
               <textarea id="diskVolumesTextarea" class="config-item"
                 placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
@@ -123,12 +123,12 @@
       <div class="row generate-buttons-row">
         <div class="col-6">
           <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
-            <%= __('appcoinfig.download_generate_btn') %>
+            <%= localeData['appcoinfig.download_generate_btn'] %>
           </button>
         </div>
         <div class="col-6">
           <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
-            <%= __('appcoinfig.generate_btn') %>
+            <%= localeData['appcoinfig.generate_btn'] %>
           </button>
         </div>
       </div>
@@ -142,10 +142,17 @@
     </div>
   </div>
 
+  <button id="ttt">test</button>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
-  <script src="./libs/jquery-3.6.0.min.js"></script>
-  <script src="./libs/bootstrap.bundle.min.js"></script>
+  <script src="../libs/jquery-3.6.0.min.js"></script>
+  <script src="../libs/bootstrap.bundle.min.js"></script>
+  <script src="../renderer.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

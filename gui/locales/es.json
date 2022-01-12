@@ -1,3 +1,19 @@
 {
-  "general.title": "Coctohug"
+  "appcoinfig.contoller_ip": "IP del controlador",
+  "appcoinfig.disk_header": "Volúmenes de disco (un disco por línea, coloque todos sus discos/carpetas que contienen archivos trazados aquí):",
+  "appcoinfig.download_generate_btn": "Descargar bien organizado docker-compose.yml",
+  "appcoinfig.farmer_mode": "Solo minero o agricultor (tiene más de 2 computadoras, minería sin iniciar el servicio de billetera)",
+  "appcoinfig.forks_mine": "Me gustaría minar estas cadenas de bloques (la cantidad máxima de cadenas de bloques que su computadora puede admitir es igual a la memoria total dividida por 2G, así que no seleccione todas a menos que su memoria esté por encima de 64G):",
+  "appcoinfig.fullnode_mode": "Minería agrícola de nodo completo estándar (1 computadora independiente con nodo completo y billetera para minería)",
+  "appcoinfig.generate_btn": "Genera docker-compose.yml",
+  "appcoinfig.harvester_ip": "PI del cosechador",
+  "appcoinfig.harvester_mode": "Cosechadora (tiene más de 2 computadoras, las cosechadoras deben conectarse a una computadora del agricultor)",
+  "appcoinfig.missing_controller_ip": "Falta la dirección IP del controlador",
+  "appcoinfig.missing_disk": "Agregue al menos un disco de volumen",
+  "appcoinfig.missing_fork": "Elige al menos un tenedor",
+  "appcoinfig.missing_harvester_ip": "Falta la dirección IP del cosechador",
+  "appcoinfig.modes": "Elija el modo que más le convenga:",
+  "appcoinfig.select_un_all": "Seleccionar todo / Deseleccionar todo",
+  "appcoinfig.wallet_mode": "Solo billetera (tiene más de 2 computadoras, la billetera necesita conectarse a una computadora de granjero)",
+  "general.title": "cocoabrazo"
 }

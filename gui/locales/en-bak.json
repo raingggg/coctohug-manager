@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "Contoller IP",
+  "appcoinfig.disk_header": "Disk Volumes(one disk per line, put all your disks/folders that contains plotted files here):",
+  "appcoinfig.download_generate_btn": "Download Well Organized docker-compose.yml",
+  "appcoinfig.farmer_mode": "Mining or farmer only(has 2+ computers, mining without starting wallet service)",
+  "appcoinfig.forks_mine": "I would like to mine on these blockchains(the maximum number of blockchains your computer can support is equal to the total memory divided by 2G - so don't select all unless your memory is above 64G):",
+  "appcoinfig.fullnode_mode": "Standard fullnode farmer mining(1 standalone computer with fullnode and wallet for mining)",
+  "appcoinfig.generate_btn": "Generate docker-compose.yml",
+  "appcoinfig.harvester_ip": "Harvester IP",
+  "appcoinfig.harvester_mode": "Harvester(has 2+ computers, harvesters need to connect to one farmer computer)",
+  "appcoinfig.missing_controller_ip": "Missing controller IP address",
+  "appcoinfig.missing_disk": "Please add at least one volume disk",
+  "appcoinfig.missing_fork": "Please choose at least one fork",
+  "appcoinfig.missing_harvester_ip": "Missing harvester IP address",
+  "appcoinfig.modes": "Choose the mode that suits you:",
+  "appcoinfig.select_un_all": "Select All / Unselect All",
+  "appcoinfig.wallet_mode": "Wallet only(has 2+ computers, wallet needs to connect to one farmer computer)",
   "general.title": "Coctohug"
 }

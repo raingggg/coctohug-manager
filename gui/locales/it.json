@@ -1,3 +1,19 @@
 {
-  "general.title": "coctohug"
+  "appcoinfig.contoller_ip": "IP del controllore",
+  "appcoinfig.disk_header": "Volumi del disco (un disco per riga, metti qui tutti i tuoi dischi/cartelle che contengono file tracciati):",
+  "appcoinfig.download_generate_btn": "Scarica ben organizzato docker-compose.yml",
+  "appcoinfig.farmer_mode": "Solo mining o farmer (ha più di 2 computer, mining senza avviare il servizio portafoglio)",
+  "appcoinfig.forks_mine": "Vorrei estrarre su queste blockchain (il numero massimo di blockchain che il tuo computer può supportare è uguale alla memoria totale divisa per 2G, quindi non selezionarle tutte a meno che la tua memoria non sia superiore a 64G):",
+  "appcoinfig.fullnode_mode": "Mining standard fullnode farmer (1 computer autonomo con fullnode e portafoglio per il mining)",
+  "appcoinfig.generate_btn": "Genera docker-compose.yml",
+  "appcoinfig.harvester_ip": "Mietitrice IP",
+  "appcoinfig.harvester_mode": "Harvester (ha 2+ computer, le mietitrici devono connettersi a un computer contadino)",
+  "appcoinfig.missing_controller_ip": "Indirizzo IP del controller mancante",
+  "appcoinfig.missing_disk": "Aggiungi almeno un disco di volume",
+  "appcoinfig.missing_fork": "Scegli almeno un fork",
+  "appcoinfig.missing_harvester_ip": "Indirizzo IP della mietitrice mancante",
+  "appcoinfig.modes": "Scegli la modalità che fa per te:",
+  "appcoinfig.select_un_all": "Seleziona tutto / Deseleziona tutto",
+  "appcoinfig.wallet_mode": "Solo portafoglio (ha più di 2 computer, il portafoglio deve essere connesso a un computer contadino)",
+  "general.title": "Cottohug"
 }

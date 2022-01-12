@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <link href="./styles.css" rel="stylesheet">
   <title>
     콕토허그
   </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self'; script-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
@@ -16,8 +18,211 @@
   We are using Node.js <span id="node-version"></span>,
   Chromium <span id="chrome-version"></span>,
   and Electron <span id="electron-version"></span>.
+
+  <div class="page-wrapper app-config">
+    <div class="container">
+      <div class="mode config-row">
+        <div>
+          적합한 모드를 선택하십시오.
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
+            표준 풀노드 파머 마이닝(풀노드가 있는 독립형 컴퓨터 1대 및 마이닝용 지갑)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
+            수확기(2대 이상의 컴퓨터 보유, 수확기는 하나의 농부 컴퓨터에 연결해야 함)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
+            지갑 전용(2대 이상의 컴퓨터 보유, 지갑은 농부 컴퓨터 1대에 연결해야 함)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
+            마이닝 또는 파머 전용(2대 이상의 컴퓨터 보유, 지갑 서비스 시작 없이 마이닝)
+          </span>
+        </div>
+      </div>
+      <div class="row ips input-group  config-row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              컨트롤러 IP
+            </span>
+            <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
+          </div>
+        </div>
+        <div class="col-6 visually-hidden" id='harvesterIPCol'>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              수확기 IP
+            </span>
+            <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
+          </div>
+        </div>
+      </div>
+      <div class="row forks config-row">
+        <div class="col-12">
+          <div>
+            <span>
+              다음 블록체인에서 채굴하고 싶습니다(컴퓨터가 지원할 수 있는 최대 블록체인 수는 총 메모리를 2G로 나눈 값과 같습니다. 따라서 메모리가 64G를 초과하지 않는 한 모두 선택하지 마십시오):
+            </span>
+            <span>
+              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
+                모두 선택 / 모두 선택 취소
+              </button>
+            </span>
+          </div>
+          <div class="forks-names row">
+            
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="btcgreen">
+                  btcgreen
+                </span>
+                <span class="fork-name-number">
+                  1
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="ethgreen">
+                  ethgreen
+                </span>
+                <span class="fork-name-number">
+                  2
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="flax">
+                  flax
+                </span>
+                <span class="fork-name-number">
+                  3
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="hddcoin">
+                  hddcoin
+                </span>
+                <span class="fork-name-number">
+                  4
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="maize">
+                  maize
+                </span>
+                <span class="fork-name-number">
+                  5
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="shibgreen">
+                  shibgreen
+                </span>
+                <span class="fork-name-number">
+                  6
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="skynet">
+                  skynet
+                </span>
+                <span class="fork-name-number">
+                  7
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="stor">
+                  stor
+                </span>
+                <span class="fork-name-number">
+                  8
+                </span>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+      <div class="row config-row">
+        <div class="alert alert-danger" role="alert" id="allChecks">
+          <div class="alert-item visually-hidden" id="missingControllerIP">
+            컨트롤러 IP 주소 누락
+          </div>
+          <div class="alert-item visually-hidden" id="missingHarvesterIP">
+            수확기 IP 주소 누락
+          </div>
+          <div class="alert-item visually-hidden" id="missingFork">
+            포크를 하나 이상 선택하세요.
+          </div>
+          <div class="alert-item visually-hidden" id="missingDisk">
+            볼륨 디스크를 하나 이상 추가하십시오.
+          </div>
+        </div>
+      </div>
+      <div class="row disks">
+        <div class="col-12" id='diskVolumeCol'>
+          디스크 볼륨(한 줄에 하나의 디스크, 플롯된 파일이 포함된 모든 디스크/폴더를 여기에 넣으십시오):
+            <div>
+              <textarea id="diskVolumesTextarea" class="config-item"
+                placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row generate-buttons-row">
+        <div class="col-6">
+          <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
+            잘 정리된 docker-compose.yml 다운로드
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
+            docker-compose.yml 생성
+          </button>
+        </div>
+      </div>
+      <div class="row docker-compose">
+        <div class="col-12">
+          <div>
+            <textarea id="dockerComposeTextarea" class="visually-hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="ttt">test</button>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
+  <script src="../libs/jquery-3.6.0.min.js"></script>
+  <script src="../libs/bootstrap.bundle.min.js"></script>
+  <script src="../renderer.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

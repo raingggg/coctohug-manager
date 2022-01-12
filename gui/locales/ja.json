@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "コントローラーIP",
+  "appcoinfig.disk_header": "ディスクボリューム（1行に1つのディスク、プロットされたファイルを含むすべてのディスク/フォルダーをここに配置）：",
+  "appcoinfig.download_generate_btn": "よく整理されたdockerをダウンロード-compose.yml",
+  "appcoinfig.farmer_mode": "マイニングまたはファーマーのみ（2台以上のコンピューターがあり、ウォレットサービスを開始せずにマイニング）",
+  "appcoinfig.forks_mine": "これらのブロックチェーンをマイニングしたいと思います（コンピューターがサポートできるブロックチェーンの最大数は、合計メモリを2Gで割ったものに等しいため、メモリが64Gを超えない限り、すべてを選択しないでください）。",
+  "appcoinfig.fullnode_mode": "標準のフルノードファーマーマイニング（マイニング用のフルノードとウォレットを備えたスタンドアロンコンピューター1台）",
+  "appcoinfig.generate_btn": "docker-compose.ymlを生成します",
+  "appcoinfig.harvester_ip": "ハーベスタIP",
+  "appcoinfig.harvester_mode": "ハーベスター（2台以上のコンピューターがあり、ハーベスターは1台の農家のコンピューターに接続する必要があります）",
+  "appcoinfig.missing_controller_ip": "コントローラのIPアドレスがありません",
+  "appcoinfig.missing_disk": "少なくとも1つのボリュームディスクを追加してください",
+  "appcoinfig.missing_fork": "少なくとも1つのフォークを選択してください",
+  "appcoinfig.missing_harvester_ip": "ハーベスタのIPアドレスがありません",
+  "appcoinfig.modes": "自分に合ったモードを選択してください。",
+  "appcoinfig.select_un_all": "すべて選択/すべて選択解除",
+  "appcoinfig.wallet_mode": "ウォレットのみ（2台以上のコンピューターがあり、ウォレットは1台の農家のコンピューターに接続する必要があります）",
   "general.title": "コクトフグ"
 }

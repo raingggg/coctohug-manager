@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP pengontrol",
+  "appcoinfig.disk_header": "Volume Disk (satu disk per baris, letakkan semua disk/folder Anda yang berisi file yang diplot di sini):",
+  "appcoinfig.download_generate_btn": "Unduh docker-compose.yml yang Terorganisir dengan Baik",
+  "appcoinfig.farmer_mode": "Penambangan atau petani saja (memiliki 2+ komputer, menambang tanpa memulai layanan dompet)",
+  "appcoinfig.forks_mine": "Saya ingin menambang di blockchain ini (jumlah maksimum blockchain yang dapat didukung komputer Anda sama dengan total memori dibagi 2G - jadi jangan pilih semua kecuali memori Anda di atas 64G):",
+  "appcoinfig.fullnode_mode": "Penambangan petani fullnode standar (1 komputer mandiri dengan fullnode dan dompet untuk menambang)",
+  "appcoinfig.generate_btn": "Hasilkan docker-compose.yml",
+  "appcoinfig.harvester_ip": "IP pemanen",
+  "appcoinfig.harvester_mode": "Pemanen (memiliki 2+ komputer, pemanen perlu terhubung ke satu komputer petani)",
+  "appcoinfig.missing_controller_ip": "Alamat IP pengontrol tidak ada",
+  "appcoinfig.missing_disk": "Harap tambahkan setidaknya satu disk volume",
+  "appcoinfig.missing_fork": "Silakan pilih setidaknya satu garpu",
+  "appcoinfig.missing_harvester_ip": "Alamat IP pemanen hilang",
+  "appcoinfig.modes": "Pilih mode yang cocok untuk Anda:",
+  "appcoinfig.select_un_all": "Pilih Semua / Batal Pilih Semua",
+  "appcoinfig.wallet_mode": "Dompet saja (memiliki 2+ komputer, dompet perlu terhubung ke satu komputer petani)",
   "general.title": "cocohug"
 }

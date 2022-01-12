@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <link href="./styles.css" rel="stylesheet">
   <title>
-    椰子虎
+    椰子
   </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self'; script-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
@@ -16,8 +18,211 @@
   We are using Node.js <span id="node-version"></span>,
   Chromium <span id="chrome-version"></span>,
   and Electron <span id="electron-version"></span>.
+
+  <div class="page-wrapper app-config">
+    <div class="container">
+      <div class="mode config-row">
+        <div>
+          選擇適合您的模式：
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
+            標準全節點農民挖礦（1 台帶全節點和錢包的獨立計算機用於挖礦）
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
+            收割機（有2台以上電腦，收割機需要連接一台農民電腦）
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
+            僅限錢包（有2台以上電腦，錢包需要連接一台農民電腦）
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
+            僅挖礦或農民（擁有2台以上計算機，無需啟動錢包服務即可挖礦）
+          </span>
+        </div>
+      </div>
+      <div class="row ips input-group  config-row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              控制器 IP
+            </span>
+            <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
+          </div>
+        </div>
+        <div class="col-6 visually-hidden" id='harvesterIPCol'>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              收割機 IP
+            </span>
+            <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
+          </div>
+        </div>
+      </div>
+      <div class="row forks config-row">
+        <div class="col-12">
+          <div>
+            <span>
+              我想在這些區塊鏈上挖礦（你的計算機可以支持的最大區塊鏈數等於總內存除以 2G - 所以不要全選，除非你的內存超過 64G）：
+            </span>
+            <span>
+              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
+                全選/取消全選
+              </button>
+            </span>
+          </div>
+          <div class="forks-names row">
+            
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="btcgreen">
+                  btcgreen
+                </span>
+                <span class="fork-name-number">
+                  1
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="ethgreen">
+                  ethgreen
+                </span>
+                <span class="fork-name-number">
+                  2
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="flax">
+                  flax
+                </span>
+                <span class="fork-name-number">
+                  3
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="hddcoin">
+                  hddcoin
+                </span>
+                <span class="fork-name-number">
+                  4
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="maize">
+                  maize
+                </span>
+                <span class="fork-name-number">
+                  5
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="shibgreen">
+                  shibgreen
+                </span>
+                <span class="fork-name-number">
+                  6
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="skynet">
+                  skynet
+                </span>
+                <span class="fork-name-number">
+                  7
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="stor">
+                  stor
+                </span>
+                <span class="fork-name-number">
+                  8
+                </span>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+      <div class="row config-row">
+        <div class="alert alert-danger" role="alert" id="allChecks">
+          <div class="alert-item visually-hidden" id="missingControllerIP">
+            缺少控制器 IP 地址
+          </div>
+          <div class="alert-item visually-hidden" id="missingHarvesterIP">
+            缺少收割機 IP 地址
+          </div>
+          <div class="alert-item visually-hidden" id="missingFork">
+            請至少選擇一個叉子
+          </div>
+          <div class="alert-item visually-hidden" id="missingDisk">
+            請至少添加一個捲盤
+          </div>
+        </div>
+      </div>
+      <div class="row disks">
+        <div class="col-12" id='diskVolumeCol'>
+          磁盤捲（每行一個磁盤，將所有包含繪圖文件的磁盤/文件夾放在此處）：
+            <div>
+              <textarea id="diskVolumesTextarea" class="config-item"
+                placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row generate-buttons-row">
+        <div class="col-6">
+          <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
+            下載組織良好的 docker-compose.yml
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
+            生成 docker-compose.yml
+          </button>
+        </div>
+      </div>
+      <div class="row docker-compose">
+        <div class="col-12">
+          <div>
+            <textarea id="dockerComposeTextarea" class="visually-hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="ttt">test</button>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
+  <script src="../libs/jquery-3.6.0.min.js"></script>
+  <script src="../libs/bootstrap.bundle.min.js"></script>
+  <script src="../renderer.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

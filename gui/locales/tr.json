@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "Denetleyici IP'si",
+  "appcoinfig.disk_header": "Disk Birimleri (satır başına bir disk, çizilen dosyaları içeren tüm disklerinizi/klasörlerinizi buraya koyun):",
+  "appcoinfig.download_generate_btn": "Well Organized docker-compose.yml dosyasını indirin",
+  "appcoinfig.farmer_mode": "Yalnızca madencilik veya çiftçi (2+ bilgisayar var, cüzdan hizmetini başlatmadan madencilik)",
+  "appcoinfig.forks_mine": "Bu blok zincirlerinde madencilik yapmak istiyorum (bilgisayarınızın destekleyebileceği maksimum blok zinciri sayısı toplam belleğin 2G'ye bölünmesine eşittir - bu nedenle belleğiniz 64G'nin üzerinde değilse hepsini seçmeyin):",
+  "appcoinfig.fullnode_mode": "Standart tam düğümlü çiftçi madenciliği(madencilik için tam düğümlü ve cüzdanlı 1 bağımsız bilgisayar)",
+  "appcoinfig.generate_btn": "docker-compose.yml oluştur",
+  "appcoinfig.harvester_ip": "biçerdöver IP'si",
+  "appcoinfig.harvester_mode": "Biçerdöver(2+ bilgisayara sahiptir, biçerdöverlerin bir çiftçi bilgisayarına bağlanması gerekir)",
+  "appcoinfig.missing_controller_ip": "Eksik denetleyici IP adresi",
+  "appcoinfig.missing_disk": "Lütfen en az bir birim diski ekleyin",
+  "appcoinfig.missing_fork": "Lütfen en az bir çatal seçin",
+  "appcoinfig.missing_harvester_ip": "Hasat makinesi IP adresi eksik",
+  "appcoinfig.modes": "Size uygun modu seçin:",
+  "appcoinfig.select_un_all": "Tümünü Seç / Tümünün Seçimini Kaldır",
+  "appcoinfig.wallet_mode": "Yalnızca cüzdan (2+ bilgisayar vardır, cüzdanın bir çiftçi bilgisayarına bağlanması gerekir)",
   "general.title": "Coctohug"
 }

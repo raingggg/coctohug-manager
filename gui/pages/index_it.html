@@ -2,13 +2,15 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <link href="./styles.css" rel="stylesheet">
   <title>
-    coctohug
+    Cottohug
   </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self'; script-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
@@ -16,8 +18,211 @@
   We are using Node.js <span id="node-version"></span>,
   Chromium <span id="chrome-version"></span>,
   and Electron <span id="electron-version"></span>.
+
+  <div class="page-wrapper app-config">
+    <div class="container">
+      <div class="mode config-row">
+        <div>
+          Scegli la modalità che fa per te:
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="fullnode" checked>
+            Mining standard fullnode farmer (1 computer autonomo con fullnode e portafoglio per il mining)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="harvester">
+            Harvester (ha 2+ computer, le mietitrici devono connettersi a un computer contadino)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="wallet">
+            Solo portafoglio (ha più di 2 computer, il portafoglio deve essere connesso a un computer contadino)
+          </span>
+        </div>
+        <div>
+          <span class="check-item-with-label">
+            <input type="radio" class="form-check-input config-item" name="mode" value="farmer">
+            Solo mining o farmer (ha più di 2 computer, mining senza avviare il servizio portafoglio)
+          </span>
+        </div>
+      </div>
+      <div class="row ips input-group  config-row">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              IP del controllore
+            </span>
+            <input type="text" class="form-control config-item" id="controllerIP" placeholder="192.168.1.126">
+          </div>
+        </div>
+        <div class="col-6 visually-hidden" id='harvesterIPCol'>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              Mietitrice IP
+            </span>
+            <input type="text" class="form-control config-item" id="harvesterIP" placeholder="192.168.1.100">
+          </div>
+        </div>
+      </div>
+      <div class="row forks config-row">
+        <div class="col-12">
+          <div>
+            <span>
+              Vorrei estrarre su queste blockchain (il numero massimo di blockchain che il tuo computer può supportare è uguale alla memoria totale divisa per 2G, quindi non selezionarle tutte a meno che la tua memoria non sia superiore a 64G):
+            </span>
+            <span>
+              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
+                Seleziona tutto / Deseleziona tutto
+              </button>
+            </span>
+          </div>
+          <div class="forks-names row">
+            
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="btcgreen">
+                  btcgreen
+                </span>
+                <span class="fork-name-number">
+                  1
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="ethgreen">
+                  ethgreen
+                </span>
+                <span class="fork-name-number">
+                  2
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="flax">
+                  flax
+                </span>
+                <span class="fork-name-number">
+                  3
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="hddcoin">
+                  hddcoin
+                </span>
+                <span class="fork-name-number">
+                  4
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="maize">
+                  maize
+                </span>
+                <span class="fork-name-number">
+                  5
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="shibgreen">
+                  shibgreen
+                </span>
+                <span class="fork-name-number">
+                  6
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="skynet">
+                  skynet
+                </span>
+                <span class="fork-name-number">
+                  7
+                </span>
+              </div>
+              
+              <div class="col-3">
+                <span class="check-item-with-label">
+                  <input type="checkbox" class="form-check-input config-item" name="fork-name" value="stor">
+                  stor
+                </span>
+                <span class="fork-name-number">
+                  8
+                </span>
+              </div>
+              
+          </div>
+        </div>
+      </div>
+      <div class="row config-row">
+        <div class="alert alert-danger" role="alert" id="allChecks">
+          <div class="alert-item visually-hidden" id="missingControllerIP">
+            Indirizzo IP del controller mancante
+          </div>
+          <div class="alert-item visually-hidden" id="missingHarvesterIP">
+            Indirizzo IP della mietitrice mancante
+          </div>
+          <div class="alert-item visually-hidden" id="missingFork">
+            Scegli almeno un fork
+          </div>
+          <div class="alert-item visually-hidden" id="missingDisk">
+            Aggiungi almeno un disco di volume
+          </div>
+        </div>
+      </div>
+      <div class="row disks">
+        <div class="col-12" id='diskVolumeCol'>
+          Volumi del disco (un disco per riga, metti qui tutti i tuoi dischi/cartelle che contengono file tracciati):
+            <div>
+              <textarea id="diskVolumesTextarea" class="config-item"
+                placeholder="/mnt/disk1&#10;/mnt/disk2&#10;/Volumes/disk1&#10;/Volumes/disk2&#10;C:/my_chia_plots1&#10;C:/my_chia_plots2&#10;//192.168.1.101/myshare&#10;//192.168.1.102/myshare&#10;"></textarea>
+            </div>
+        </div>
+      </div>
+      <div class="row generate-buttons-row">
+        <div class="col-6">
+          <button class="btn btn-success generate-btns" id="downloadGenerateDockerBtn" disabled>
+            Scarica ben organizzato docker-compose.yml
+          </button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-secondary float-end generate-btns" id="generateDockerBtn" disabled>
+            Genera docker-compose.yml
+          </button>
+        </div>
+      </div>
+      <div class="row docker-compose">
+        <div class="col-12">
+          <div>
+            <textarea id="dockerComposeTextarea" class="visually-hidden"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="ttt">test</button>
+
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
   <!-- You can also require other files to run in this process -->
-  <script src="./renderer.js"></script>
+  <script src="../libs/jquery-3.6.0.min.js"></script>
+  <script src="../libs/bootstrap.bundle.min.js"></script>
+  <script src="../renderer.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

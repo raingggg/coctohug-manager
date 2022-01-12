@@ -1,3 +1,19 @@
 {
-  "general.title": "椰子虎"
+  "appcoinfig.contoller_ip": "控制器 IP",
+  "appcoinfig.disk_header": "磁盤捲（每行一個磁盤，將所有包含繪圖文件的磁盤/文件夾放在此處）：",
+  "appcoinfig.download_generate_btn": "下載組織良好的 docker-compose.yml",
+  "appcoinfig.farmer_mode": "僅挖礦或農民（擁有2台以上計算機，無需啟動錢包服務即可挖礦）",
+  "appcoinfig.forks_mine": "我想在這些區塊鏈上挖礦（你的計算機可以支持的最大區塊鏈數等於總內存除以 2G - 所以不要全選，除非你的內存超過 64G）：",
+  "appcoinfig.fullnode_mode": "標準全節點農民挖礦（1 台帶全節點和錢包的獨立計算機用於挖礦）",
+  "appcoinfig.generate_btn": "生成 docker-compose.yml",
+  "appcoinfig.harvester_ip": "收割機 IP",
+  "appcoinfig.harvester_mode": "收割機（有2台以上電腦，收割機需要連接一台農民電腦）",
+  "appcoinfig.missing_controller_ip": "缺少控制器 IP 地址",
+  "appcoinfig.missing_disk": "請至少添加一個捲盤",
+  "appcoinfig.missing_fork": "請至少選擇一個叉子",
+  "appcoinfig.missing_harvester_ip": "缺少收割機 IP 地址",
+  "appcoinfig.modes": "選擇適合您的模式：",
+  "appcoinfig.select_un_all": "全選/取消全選",
+  "appcoinfig.wallet_mode": "僅限錢包（有2台以上電腦，錢包需要連接一台農民電腦）",
+  "general.title": "椰子"
 }

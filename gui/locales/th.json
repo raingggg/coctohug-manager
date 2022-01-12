@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "IP คอนโทรเลอร์",
+  "appcoinfig.disk_header": "ปริมาณดิสก์ (หนึ่งดิสก์ต่อบรรทัด ใส่ดิสก์/โฟลเดอร์ทั้งหมดของคุณที่มีไฟล์ที่วางแผนไว้ที่นี่):",
+  "appcoinfig.download_generate_btn": "ดาวน์โหลด จัดระเบียบได้ดี docker-compose.yml",
+  "appcoinfig.farmer_mode": "การขุดหรือเกษตรกรเท่านั้น (มีคอมพิวเตอร์ 2+ เครื่อง ขุดโดยไม่ต้องเริ่มบริการกระเป๋าเงิน)",
+  "appcoinfig.forks_mine": "ฉันต้องการขุดบน blockchains เหล่านี้ (จำนวนสูงสุดของ blockchain ที่คอมพิวเตอร์ของคุณสามารถรองรับได้เท่ากับหน่วยความจำทั้งหมดหารด้วย 2G - ดังนั้นอย่าเลือกทั้งหมดเว้นแต่หน่วยความจำของคุณจะสูงกว่า 64G):",
+  "appcoinfig.fullnode_mode": "การทำเหมือง fullnode farmer แบบมาตรฐาน (คอมพิวเตอร์แบบสแตนด์อโลน 1 เครื่องพร้อม fullnode และ wallet สำหรับการขุด)",
+  "appcoinfig.generate_btn": "สร้าง docker-compose.yml",
+  "appcoinfig.harvester_ip": "เครื่องเก็บเกี่ยว IP",
+  "appcoinfig.harvester_mode": "รถเกี่ยวข้าว (มีคอมพิวเตอร์ 2 เครื่องขึ้นไป ผู้เก็บเกี่ยวต้องเชื่อมต่อกับคอมพิวเตอร์ของเกษตรกรหนึ่งเครื่อง)",
+  "appcoinfig.missing_controller_ip": "ไม่มีที่อยู่ IP ของตัวควบคุม",
+  "appcoinfig.missing_disk": "โปรดเพิ่มดิสก์โวลุ่มอย่างน้อยหนึ่งดิสก์",
+  "appcoinfig.missing_fork": "กรุณาเลือกอย่างน้อยหนึ่งส้อม",
+  "appcoinfig.missing_harvester_ip": "ไม่มีที่อยู่ IP ของเครื่องเก็บเกี่ยว",
+  "appcoinfig.modes": "เลือกโหมดที่เหมาะกับคุณ:",
+  "appcoinfig.select_un_all": "เลือกทั้งหมด / ยกเลิกการเลือกทั้งหมด",
+  "appcoinfig.wallet_mode": "กระเป๋าเงินเท่านั้น (มีคอมพิวเตอร์ 2 เครื่องขึ้นไป กระเป๋าเงินต้องเชื่อมต่อกับคอมพิวเตอร์ของเกษตรกรหนึ่งเครื่อง)",
   "general.title": "ค็อกโตฮัก"
 }

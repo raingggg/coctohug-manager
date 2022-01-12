@@ -1,3 +1,19 @@
 {
+  "appcoinfig.contoller_ip": "كونتولر IP",
+  "appcoinfig.disk_header": "أحجام القرص (قرص واحد لكل سطر ، ضع هنا جميع الأقراص / المجلدات التي تحتوي على الملفات المرسومة):",
+  "appcoinfig.download_generate_btn": "تنزيل docker-compose.yml منظم جيدًا",
+  "appcoinfig.farmer_mode": "التعدين أو المزارع فقط (لديه أكثر من 2 جهاز كمبيوتر ، والتعدين بدون بدء خدمة المحفظة)",
+  "appcoinfig.forks_mine": "أرغب في التنقيب في هذه البلوكشين (الحد الأقصى لعدد سلاسل الكتل التي يمكن لجهاز الكمبيوتر الخاص بك دعمها يساوي إجمالي الذاكرة مقسومًا على 2G - لذلك لا تحدد الكل ما لم تكن ذاكرتك أعلى من 64 جيجا):",
+  "appcoinfig.fullnode_mode": "التعدين القياسي للمزارعين (Fullnode)",
+  "appcoinfig.generate_btn": "إنشاء عامل ميناء compose.yml",
+  "appcoinfig.harvester_ip": "IP الحاصدة",
+  "appcoinfig.harvester_mode": "الحاصدة (بها أكثر من 2 جهاز كمبيوتر ، وتحتاج الحصادات إلى الاتصال بجهاز كمبيوتر مزارع واحد)",
+  "appcoinfig.missing_controller_ip": "عنوان IP لجهاز التحكم مفقود",
+  "appcoinfig.missing_disk": "الرجاء إضافة قرص وحدة تخزين واحد على الأقل",
+  "appcoinfig.missing_fork": "الرجاء اختيار شوكة واحدة على الأقل",
+  "appcoinfig.missing_harvester_ip": "عنوان IP للحاصدة مفقود",
+  "appcoinfig.modes": "اختر الوضع الذي يناسبك:",
+  "appcoinfig.select_un_all": "حدد الكل / إلغاء تحديد الكل",
+  "appcoinfig.wallet_mode": "المحفظة فقط (بها أكثر من جهازي كمبيوتر ، تحتاج المحفظة إلى الاتصال بكمبيوتر مزارع واحد)",
   "general.title": "كوكتوج"
 }

@@ -1,6 +1,15 @@
 const ejs = require('ejs');
 const path = require('path');
 const { readdir, readFile, writeFile } = require('fs/promises');
+const {
+  getFiledBlockchains,
+  getFiledLatestNews,
+  generateComposeStr,
+  WEB_DOCKER,
+} = require('../utils/blockchains');
+
+const blockchains = getFiledBlockchains('free');
+const chainNames = blockchains.map(b => b.name);
 
 const generateAll = async (startLocale, templateName, destPath) => {
   const localePath = path.resolve(__dirname, '../locales');
@@ -24,7 +33,7 @@ const generateAll = async (startLocale, templateName, destPath) => {
     console.log('locale: ', locale);
     const localeData = require(`../locales/${files[i]}`);
     Object.assign(localeData, { locale });
-    const localedContent = ejs.render(templateData, { localeData });
+    const localedContent = ejs.render(templateData, { localeData, chainNames });
     await writeFile(`${destPath}_${locale}.html`, localedContent);
   }
 };
