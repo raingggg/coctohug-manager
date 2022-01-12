@@ -74,11 +74,6 @@
             <span>
               <%= localeData['appcoinfig.forks_mine'] %>
             </span>
-            <span>
-              <button class="btn btn-outline-primary btn-sm " id="selectUnAllBtn">
-                <%= localeData['appcoinfig.select_un_all'] %>
-              </button>
-            </span>
           </div>
           <div class="forks-names row">
             <% chainNames.forEach(function(cn, cnIndex){ %>
@@ -86,9 +81,6 @@
                 <span class="check-item-with-label">
                   <input type="checkbox" class="form-check-input config-item" name="fork-name" value="<%= cn %>">
                   <%= cn %>
-                </span>
-                <span class="fork-name-number">
-                  <%= cnIndex + 1 %>
                 </span>
               </div>
               <% }); %>
