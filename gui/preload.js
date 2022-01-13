@@ -1,3 +1,5 @@
+const { initEvents } = require('./front');
+
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
@@ -10,14 +12,19 @@ window.addEventListener('DOMContentLoaded', () => {
     replaceText(`${type}-version`, process.versions[type])
   }
 
-  const path = require('path');
-  const { readdir, writeFile } = require('fs/promises');
+  // const path = require('path');
+  // const { readdir, writeFile } = require('fs/promises');
 
-  const getForks = async () => {
-    const localePath = path.resolve(__dirname, '../compose');
-    let files = await readdir(path.resolve(localePath));
-    console.log(files);
-  };
+  // const getForks = async () => {
+  //   const localePath = path.resolve(__dirname, '../compose');
+  //   let files = await readdir(path.resolve(localePath));
+  //   console.log(files);
+  // };
 
-  getForks();
+  // getForks();
+
+  initEvents();
+
+
+
 })

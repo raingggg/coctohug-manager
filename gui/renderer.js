@@ -59,19 +59,19 @@ $('.app-config .config-item').change(function () {
   }
 });
 
-$('#downloadGenerateDockerBtn').click(function () {
-  const appPage = $('.app-config');
-  // $(this).prop("disabled", true);
+// $('#downloadGenerateDockerBtn').click(function () {
+//   const appPage = $('.app-config');
+//   // $(this).prop("disabled", true);
 
-  const mode = appPage.find('input[name="mode"]:checked').val();
-  const controllerIP = appPage.find('#controllerIP').val().trim();
-  const harvesterIP = appPage.find('#harvesterIP').val().trim();
-  const forkNames = [];
-  appPage.find('input:checkbox:checked').each(function (index, item) {
-    forkNames.push($(this).val());
-  });
-  const disks = appPage.find('#diskVolumesTextarea').val().trim().split('\n').filter(d => !!d);
-  const timeZone = getTimeZone();
+//   const mode = appPage.find('input[name="mode"]:checked').val();
+//   const controllerIP = appPage.find('#controllerIP').val().trim();
+//   const harvesterIP = appPage.find('#harvesterIP').val().trim();
+//   const forkNames = [];
+//   appPage.find('input:checkbox:checked').each(function (index, item) {
+//     forkNames.push($(this).val());
+//   });
+//   const disks = appPage.find('#diskVolumesTextarea').val().trim().split('\n').filter(d => !!d);
+//   const timeZone = getTimeZone();
 
-  alert([mode, controllerIP, harvesterIP, disks, forkNames, timeZone]);
-});
+//   alert([mode, controllerIP, harvesterIP, disks, forkNames, timeZone]);
+// });
