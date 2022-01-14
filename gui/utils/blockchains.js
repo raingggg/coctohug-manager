@@ -71,11 +71,11 @@ const generateOneComposeStr = (mode, controllerIP, harvesterIP, disks, chainReco
   configStr += `    ports:\n`;
 
   ports.split(',').forEach(p => {
-    if (name === 'silicoin' && p == 10447) {
-      configStr += `      - ${p}:11447\n`;
-    } else {
-      configStr += `      - ${p}:${p}\n`;
-    }
+    // if (name === 'silicoin' && p == 10447) {
+    //   configStr += `      - ${p}:11447\n`;
+    // } else {
+    configStr += `      - ${p}:${p}\n`;
+    // }
   });
   configStr += '\n';
 

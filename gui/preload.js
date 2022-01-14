@@ -1,4 +1,5 @@
 const { initEvents } = require('./front');
+const { generateComposeFiles } = require('./back');
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.

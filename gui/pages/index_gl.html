@@ -183,7 +183,20 @@
     </div>
   </div>
 
-  <button id="ttt">test</button>
+  <table id="docker-container-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Image Name</th>
+        <th>Install</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Restart</th>
+        <th>Upgrade</th>
+        <th>Upgrade then Start</th>
+      </tr>
+    </thead>
+    <tbody id="dct-body"></tbody>
+  </table>
 
   <!-- Insert this line above script imports  -->
   <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
