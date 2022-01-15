@@ -169,6 +169,37 @@ function ccUnInstall
     }
 }
 
+function ccMigrate
+{
+    param ([string]$imageName)
+
+    if ($imageName -eq 'silicoin') {
+	    rm -r -fo ~/.coctohug-$imageName/sit/mainnet/db/*.*
+      rm -r -fo ~/.coctohug-$imageName/sit/mainnet/wallet/db/*.*
+
+      robocopy ~/.sit/mainnet/db/*.* ~/.coctohug-$imageName/sit/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+      robocopy ~/.sit/mainnet/wallet/db/*.* ~/.coctohug-$imageName/sit/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    } elseif ($imageName -eq 'nchain') {
+	    # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
+      # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
+
+      # robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+      # robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    } elseif ($imageName -eq 'chia') {
+	    # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
+      # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
+
+      # robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+      # robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    } else {
+	    rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
+      rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
+
+      robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+      robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    }
+}
+
 function ccVConnection
 {
     param ([string]$imageName)
