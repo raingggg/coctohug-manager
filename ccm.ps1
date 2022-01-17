@@ -15,8 +15,8 @@ if ("$ActionName" -eq "h" -or "$ActionName" -eq "help") {
   Write-Host "upgrade one fork such as flora: ccm upgrade flora"
   Write-Host "upgrade then start one fork such as flora: ccm upup flora"
   Write-Host "uninstall one fork such as flora: ccm uninstall flora"
-  Write-Host "migrate one fork db such as flora: ccm migrate-db flora,c:/users/username/.flora/mainnet/db"
-  Write-Host "migrate one fork wallet-db such as flora: ccm migrate-wallet flora,c:/users/username/.flora/mainnet/wallet/db"
+  Write-Host 'migrate one fork db such as flora: ccm migrate-db "flora,c:/Users/username/.flora/mainnet/db"'
+  Write-Host 'migrate one fork wallet-db such as flora: ccm migrate-wallet "flora,c:/Users/username/.flora/mainnet/wallet/db"'
 
   Write-Host
   Write-Host "quick commands for all forks:"
@@ -183,37 +183,54 @@ function ccMigrateDb
     $folder=$migrateParams.split(",")[1]
     $mainnetPath=''
     if ($imageName -eq "chia") {
-      $mainnetPath="~/.coctohug-$imageName/mainnet"
+      $mainnetPath="$HOME/.coctohug-$imageName/mainnet"
     } elseif ($imageName -eq "silicoin") {
-      $mainnetPath="~/.coctohug-$imageName/sit/mainnet"
+      $mainnetPath="$HOME/.coctohug-$imageName/sit/mainnet"
     } elseif ($imageName -eq "nchain") {
-      $mainnetPath="~/.coctohug-$imageName/ext9"
+      $mainnetPath="$HOME/.coctohug-$imageName/ext9"
     } else {
-      $mainnetPath="~/.coctohug-$imageName/$imageName/mainnet"
+      $mainnetPath="$HOME/.coctohug-$imageName/$imageName/mainnet"
     }
 
     docker-compose -f compose/$imageName/docker-compose.yml stop
     rm -r -fo $mainnetPath/db/*.*
-    robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
     docker-compose -f compose/$imageName/docker-compose.yml up -d
 }
 
 function ccMigrateWallet
 {
-    
+  param ([string]$migrateParams)
+  $imageName=$migrateParams.split(",")[0]
+  $folder=$migrateParams.split(",")[1]
+  $mainnetPath=''
+  if ($imageName -eq "chia") {
+    $mainnetPath="$HOME/.coctohug-$imageName/mainnet"
+  } elseif ($imageName -eq "silicoin") {
+    $mainnetPath="$HOME/.coctohug-$imageName/sit/mainnet"
+  } elseif ($imageName -eq "nchain") {
+    $mainnetPath="$HOME/.coctohug-$imageName/ext9"
+  } else {
+    $mainnetPath="$HOME/.coctohug-$imageName/$imageName/mainnet"
+  }
+
+  docker-compose -f compose/$imageName/docker-compose.yml stop
+  rm -r -fo $mainnetPath/wallet/db/*.*
+  robocopy $folder $mainnetPath/wallet/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
+  docker-compose -f compose/$imageName/docker-compose.yml up -d
 }
 
 function ccImportKey
 {
     keywords="$1"
-    # echo "$keywords" > ~/.coctohug/mnc.txt
-    # echo ""
-    # echo "Imported. To use it, you may run 'ccm start flax' for flax fork"
+    # Write-Host "$keywords" > $HOME/.coctohug/mnc.txt
+    # Write-Host ""
+    # Write-Host "Imported. To use it, you may run 'ccm start flax' for flax fork"
 }
 
 function ccEmptyKey
 {
-    echo '' > ~/.coctohug/mnc.txt
+    Write-Host '' > $HOME/.coctohug/mnc.txt
 }
 
 function ccVConnection
