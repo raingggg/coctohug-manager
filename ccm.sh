@@ -15,8 +15,8 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   echo "upgrade one fork such as flora: ccm upgrade flora"
   echo "upgrade then start one fork such as flora: ccm upup flora"
   echo "uninstall one fork such as flora: ccm uninstall flora"
-  echo "migrate one fork db such as flora: ccm migrate-db flora,/home/username/.flora/mainnet/db"
-  echo "migrate one fork wallet-db such as flora: ccm migrate-wallet flora,/home/username/.flora/mainnet/wallet/db"
+  echo 'migrate one fork db such as flora: ccm migrate-db "flora,/home/username/.flora/mainnet/db"'
+  echo 'migrate one fork wallet-db such as flora: ccm migrate-wallet "flora,/home/username/.flora/mainnet/wallet/db"'
 
   echo
   echo "quick commands for all forks:"
