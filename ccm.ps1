@@ -15,6 +15,8 @@ if ("$ActionName" -eq "h" -or "$ActionName" -eq "help") {
   Write-Host "upgrade one fork such as flora: ccm upgrade flora"
   Write-Host "upgrade then start one fork such as flora: ccm upup flora"
   Write-Host "uninstall one fork such as flora: ccm uninstall flora"
+  Write-Host "migrate one fork db such as flora: ccm migrate-db flora,c:/users/username/.flora/mainnet/db"
+  Write-Host "migrate one fork wallet-db such as flora: ccm migrate-wallet flora,c:/users/username/.flora/mainnet/wallet/db"
 
   Write-Host
   Write-Host "quick commands for all forks:"
@@ -25,6 +27,11 @@ if ("$ActionName" -eq "h" -or "$ActionName" -eq "help") {
   Write-Host "upgrade all forks: ccm upgrade all"
   Write-Host "upgrade then start all forks: ccm upup all"
   Write-Host "uninstall all forks: ccm uninstall all"
+
+  Write-Host
+  Write-Host "24 mnemonic words:"
+  # Write-Host "import mnemonic words: ccm import-key 'flip display churn country relax else smoke hello holiday yard involve lab detect popular climb spirit emerge brush maple glimpse jelly cross ancient female'"
+  Write-Host "empty mnemonic words: ccm empty-key"
 
   Write-Host
   Write-Host "view detailed fork status:"
@@ -169,35 +176,44 @@ function ccUnInstall
     }
 }
 
-function ccMigrate
+function ccMigrateDb
 {
-    param ([string]$imageName)
-
-    if ($imageName -eq 'silicoin') {
-	    rm -r -fo ~/.coctohug-$imageName/sit/mainnet/db/*.*
-      rm -r -fo ~/.coctohug-$imageName/sit/mainnet/wallet/db/*.*
-
-      robocopy ~/.sit/mainnet/db/*.* ~/.coctohug-$imageName/sit/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-      robocopy ~/.sit/mainnet/wallet/db/*.* ~/.coctohug-$imageName/sit/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-    } elseif ($imageName -eq 'nchain') {
-	    # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
-      # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
-
-      # robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-      # robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-    } elseif ($imageName -eq 'chia') {
-	    # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
-      # rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
-
-      # robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-      # robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    param ([string]$migrateParams)
+    $imageName=$migrateParams.split(",")[0]
+    $folder=$migrateParams.split(",")[1]
+    $mainnetPath=''
+    if ($imageName -eq "chia") {
+      $mainnetPath="~/.coctohug-$imageName/mainnet"
+    } elseif ($imageName -eq "silicoin") {
+      $mainnetPath="~/.coctohug-$imageName/sit/mainnet"
+    } elseif ($imageName -eq "nchain") {
+      $mainnetPath="~/.coctohug-$imageName/ext9"
     } else {
-	    rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/db/*.*
-      rm -r -fo ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/*.*
-
-      robocopy ~/.$imageName/mainnet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
-      robocopy ~/.$imageName/mainnet/wallet/db/*.* ~/.coctohug-$imageName/$imageName/mainnet/wallet/db/ /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+      $mainnetPath="~/.coctohug-$imageName/$imageName/mainnet"
     }
+
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    rm -r -fo $mainnetPath/db/*.*
+    robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /mov /njh /njs /ndl /nc /ns
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
+}
+
+function ccMigrateWallet
+{
+    
+}
+
+function ccImportKey
+{
+    keywords="$1"
+    # echo "$keywords" > ~/.coctohug/mnc.txt
+    # echo ""
+    # echo "Imported. To use it, you may run 'ccm start flax' for flax fork"
+}
+
+function ccEmptyKey
+{
+    echo '' > ~/.coctohug/mnc.txt
 }
 
 function ccVConnection
@@ -271,6 +287,14 @@ if ($ActionName -eq 'install') {
   ccUpUp $ActionParameter
 } elseif ($ActionName -eq 'uninstall') {
   ccUnInstall $ActionParameter
+} elseif ($ActionName -eq 'migrate-db') {
+  ccMigrateDb $ActionParameter
+} elseif ($ActionName -eq 'migrate-wallet') {
+  ccMigrateWallet $ActionParameter
+# } elseif ($ActionName -eq 'import-key') {
+#   ccImportKey $ActionParameter
+} elseif ($ActionName -eq 'empty-key') {
+  ccEmptyKey $ActionParameter
 } elseif ($ActionName -eq 'vconnection') {
   ccVConnection $ActionParameter
 } elseif ($ActionName -eq 'vchain') {
