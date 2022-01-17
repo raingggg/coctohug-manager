@@ -15,6 +15,8 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   echo "upgrade one fork such as flora: ccm upgrade flora"
   echo "upgrade then start one fork such as flora: ccm upup flora"
   echo "uninstall one fork such as flora: ccm uninstall flora"
+  echo "migrate one fork db such as flora: ccm migrate-db flora,/home/username/.flora/mainnet/db"
+  echo "migrate one fork wallet-db such as flora: ccm migrate-wallet flora,/home/username/.flora/mainnet/wallet/db"
 
   echo
   echo "quick commands for all forks:"
@@ -26,6 +28,11 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   echo "upgrade then start all forks: ccm upup all"
   echo "uninstall all forks: ccm uninstall all"
 
+  echo
+  echo "24 mnemonic words:"
+  # echo "import mnemonic words: ccm import-key 'flip display churn country relax else smoke hello holiday yard involve lab detect popular climb spirit emerge brush maple glimpse jelly cross ancient female'"
+  echo "empty mnemonic words: ccm empty-key"
+  
   echo
   echo "view detailed fork status:"
   echo "view connection info such as flora: ccm vconnection flora"
@@ -166,6 +173,61 @@ function ccUnInstall
     fi
 }
 
+function ccMigrateDb
+{
+    imageName="$(echo $1 | cut -d',' -f1)"
+    folder="$(echo $1 | cut -d',' -f2)"
+    mainnetPath=''
+    if [[ ${imageName} == "chia" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/mainnet
+    elif [[ $imageName == "silicoin" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/sit/mainnet
+    elif [[ $imageName == "nchain" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/ext9
+    else
+      mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
+    fi
+
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    rm -fr $mainnetPath/db/*.*
+    cp -r $folder/*.* $mainnetPath/db/
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
+}
+
+function ccMigrateWallet
+{
+    imageName="$(echo $1 | cut -d',' -f1)"
+    folder="$(echo $1 | cut -d',' -f2)"
+    mainnetPath=''
+    if [[ ${imageName} == "chia" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/mainnet
+    elif [[ $imageName == "silicoin" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/sit/mainnet
+    elif [[ $imageName == "nchain" ]]; then
+      mainnetPath=~/.coctohug-${imageName}/ext9
+    else
+      mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
+    fi
+
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    rm -fr $mainnetPath/wallet/db/*.*
+    cp -r $folder/*.* $mainnetPath/wallet/db/
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
+}
+
+function ccImportKey
+{
+    keywords="$1"
+    # echo "$keywords" > ~/.coctohug/mnc.txt
+    # echo ""
+    # echo "Imported. To use it, you may run 'ccm start flax' for flax fork"
+}
+
+function ccEmptyKey
+{
+    echo '' > ~/.coctohug/mnc.txt
+}
+
 function ccVConnection
 {
     imageName=$1
@@ -240,6 +302,14 @@ elif [[ $ActionName == "upup" ]]; then
   ccUpUp $ActionParameter
 elif [[ $ActionName == "uninstall" ]]; then
   ccUnInstall $ActionParameter
+elif [[ $ActionName == "migrate-db" ]]; then
+  ccMigrateDb $ActionParameter
+elif [[ $ActionName == "migrate-wallet" ]]; then
+  ccMigrateWallet $ActionParameter
+# elif [[ $ActionName == "import-key" ]]; then
+#   ccImportKey "$ActionParameter"
+elif [[ $ActionName == "empty-key" ]]; then
+  ccEmptyKey $ActionParameter
 elif [[ $ActionName == "vconnection" ]]; then
   ccVConnection $ActionParameter
 elif [[ $ActionName == "vchain" ]]; then
