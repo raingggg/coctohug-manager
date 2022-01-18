@@ -32,7 +32,7 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   echo "24 mnemonic words:"
   # echo "import mnemonic words: ccm import-key 'flip display churn country relax else smoke hello holiday yard involve lab detect popular climb spirit emerge brush maple glimpse jelly cross ancient female'"
   echo "empty mnemonic words: ccm empty-key"
-  
+
   echo
   echo "view detailed fork status:"
   echo "view connection info such as flora: ccm vconnection flora"
@@ -44,7 +44,7 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   echo
   echo "go to docker/fork container:"
   echo "go inside docker such as flora: ccm docker flora"
-  
+
   echo
   echo "docker management:"
   echo "clean all unused docker images: ccm clean"
@@ -54,237 +54,220 @@ if [[ "$1" == "-h" || "$1" == "-help" || "$1" == "help" ]]; then
   exit 0
 fi
 
-function ccInstall
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml pull
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml pull  
-    fi
+sleepSeconds=60
+fcount=$(grep -r 'fullnode' compose/*/docker-compose.yml | wc -l)
+if [[ $fcount -gt 5 ]]; then
+  sleepSeconds=300
+fi
+
+function ccInstall {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml pull
+    done
+  else
+    docker-compose -f compose/$imageName/docker-compose.yml pull
+  fi
 }
 
-function ccStart
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml up -d
-        echo "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        echo `date +"%Y-%m-%d %T"`
-        sleep 5m
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml up -d 
-    fi
-}
-
-function ccStop
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml stop
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml stop  
-    fi
-}
-
-function ccReStart
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml restart
-        echo "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        echo `date +"%Y-%m-%d %T"`
-        sleep 5m
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml restart  
-    fi
-}
-
-function ccUpgrade
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml stop
-        docker-compose -f $f/docker-compose.yml rm -f
-        docker-compose -f $f/docker-compose.yml pull
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-      docker-compose -f compose/$imageName/docker-compose.yml pull  
-    fi
-}
-
-function ccUpUp
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml stop
-        docker-compose -f $f/docker-compose.yml rm -f
-        docker-compose -f $f/docker-compose.yml pull
-        docker-compose -f $f/docker-compose.yml up -d
-        echo "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        echo `date +"%Y-%m-%d %T"`
-        sleep 5m
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-      docker-compose -f compose/$imageName/docker-compose.yml pull  
-      docker-compose -f compose/$imageName/docker-compose.yml up -d
-    fi
-}
-
-function ccUnInstall
-{
-    imageName=$1
-    if [[ $imageName == "all" ]]; then
-      for f in compose/*
-      do
-        echo "processing $f ..."
-        docker-compose -f $f/docker-compose.yml stop
-        docker-compose -f $f/docker-compose.yml rm -f
-      done
-    else
-      docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-    fi
-}
-
-function ccMigrateDb
-{
-    imageName="$(echo $1 | cut -d',' -f1)"
-    folder="$(echo $1 | cut -d',' -f2)"
-    mainnetPath=''
-    if [[ ${imageName} == "chia" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/mainnet
-    elif [[ $imageName == "silicoin" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/sit/mainnet
-    elif [[ $imageName == "nchain" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/ext9
-    else
-      mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
-    fi
-
-    docker-compose -f compose/$imageName/docker-compose.yml stop
-    rm -fr $mainnetPath/db/*.*
-    cp -r $folder/*.* $mainnetPath/db/
+function ccStart {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml up -d
+      echo "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      echo $(date +"%Y-%m-%d %T")
+      sleep ${sleepSeconds}s
+    done
+  else
     docker-compose -f compose/$imageName/docker-compose.yml up -d
+  fi
+
+  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
 }
 
-function ccMigrateWallet
-{
-    imageName="$(echo $1 | cut -d',' -f1)"
-    folder="$(echo $1 | cut -d',' -f2)"
-    mainnetPath=''
-    if [[ ${imageName} == "chia" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/mainnet
-    elif [[ $imageName == "silicoin" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/sit/mainnet
-    elif [[ $imageName == "nchain" ]]; then
-      mainnetPath=~/.coctohug-${imageName}/ext9
-    else
-      mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
-    fi
-
+function ccStop {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml stop
+    done
+  else
     docker-compose -f compose/$imageName/docker-compose.yml stop
-    rm -fr $mainnetPath/wallet/db/*.*
-    cp -r $folder/*.* $mainnetPath/wallet/db/
+  fi
+}
+
+function ccReStart {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml restart
+      echo "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      echo $(date +"%Y-%m-%d %T")
+      sleep ${sleepSeconds}s
+    done
+  else
+    docker-compose -f compose/$imageName/docker-compose.yml restart
+  fi
+
+  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+}
+
+function ccUpgrade {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml stop
+      docker-compose -f $f/docker-compose.yml rm -f
+      docker-compose -f $f/docker-compose.yml pull
+    done
+  else
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+    docker-compose -f compose/$imageName/docker-compose.yml pull
+  fi
+}
+
+function ccUpUp {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml stop
+      docker-compose -f $f/docker-compose.yml rm -f
+      docker-compose -f $f/docker-compose.yml pull
+      docker-compose -f $f/docker-compose.yml up -d
+      echo "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      echo $(date +"%Y-%m-%d %T")
+      sleep ${sleepSeconds}s
+    done
+  else
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+    docker-compose -f compose/$imageName/docker-compose.yml pull
     docker-compose -f compose/$imageName/docker-compose.yml up -d
+  fi
+
+  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
 }
 
-function ccImportKey
-{
-    keywords="$1"
-    # echo "$keywords" > ~/.coctohug/mnc.txt
-    # echo ""
-    # echo "Imported. To use it, you may run 'ccm start flax' for flax fork"
+function ccUnInstall {
+  imageName=$1
+  if [[ $imageName == "all" ]]; then
+    for f in compose/*; do
+      echo "processing $f ..."
+      docker-compose -f $f/docker-compose.yml stop
+      docker-compose -f $f/docker-compose.yml rm -f
+    done
+  else
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+  fi
 }
 
-function ccEmptyKey
-{
-    echo '' > ~/.coctohug/mnc.txt
+function ccMigrateDb {
+  imageName="$(echo $1 | cut -d',' -f1)"
+  folder="$(echo $1 | cut -d',' -f2)"
+  mainnetPath=''
+  if [[ ${imageName} == "chia" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/mainnet
+  elif [[ $imageName == "silicoin" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/sit/mainnet
+  elif [[ $imageName == "nchain" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/ext9
+  else
+    mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
+  fi
+
+  docker-compose -f compose/$imageName/docker-compose.yml stop
+  rm -fr $mainnetPath/db/*.*
+  cp -r $folder/*.* $mainnetPath/db/
+  docker-compose -f compose/$imageName/docker-compose.yml up -d
 }
 
-function ccVConnection
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName $imageName show -c
+function ccMigrateWallet {
+  imageName="$(echo $1 | cut -d',' -f1)"
+  folder="$(echo $1 | cut -d',' -f2)"
+  mainnetPath=''
+  if [[ ${imageName} == "chia" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/mainnet
+  elif [[ $imageName == "silicoin" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/sit/mainnet
+  elif [[ $imageName == "nchain" ]]; then
+    mainnetPath=~/.coctohug-${imageName}/ext9
+  else
+    mainnetPath=~/.coctohug-${imageName}/${imageName}/mainnet
+  fi
+
+  docker-compose -f compose/$imageName/docker-compose.yml stop
+  rm -fr $mainnetPath/wallet/db/*.*
+  cp -r $folder/*.* $mainnetPath/wallet/db/
+  docker-compose -f compose/$imageName/docker-compose.yml up -d
 }
 
-function ccVChain
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName $imageName show -s
+function ccImportKey {
+  keywords="$1"
+  # echo "$keywords" > ~/.coctohug/mnc.txt
+  # echo ""
+  # echo "Imported. To use it, you may run 'ccm start flax' for flax fork"
 }
 
-function ccVSummary
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName $imageName farm summary
+function ccEmptyKey {
+  echo '' >~/.coctohug/mnc.txt
 }
 
-function ccVWallet
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName $imageName wallet show
+function ccVConnection {
+  imageName=$1
+  docker exec -it coctohug-$imageName $imageName show -c
 }
 
-function ccVKey
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName $imageName keys show
+function ccVChain {
+  imageName=$1
+  docker exec -it coctohug-$imageName $imageName show -s
 }
 
-function ccVLog
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
+function ccVSummary {
+  imageName=$1
+  docker exec -it coctohug-$imageName $imageName farm summary
 }
 
-function ccDocker
-{
-    imageName=$1
-    docker exec -it coctohug-$imageName /bin/bash
+function ccVWallet {
+  imageName=$1
+  docker exec -it coctohug-$imageName $imageName wallet show
 }
 
-function ccClean
-{
-    docker image prune -a
+function ccVKey {
+  imageName=$1
+  docker exec -it coctohug-$imageName $imageName keys show
 }
 
-function ccContainer
-{
-    docker ps -a
+function ccVLog {
+  imageName=$1
+  docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
 }
 
-function ccImage
-{
-    docker images
+function ccDocker {
+  imageName=$1
+  docker exec -it coctohug-$imageName /bin/bash
 }
 
+function ccClean {
+  docker image prune -a
+}
+
+function ccContainer {
+  docker ps -a
+}
+
+function ccImage {
+  docker images
+}
 
 ActionName=$1
 ActionParameter=$2

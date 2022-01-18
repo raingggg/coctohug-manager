@@ -54,164 +54,179 @@ if ("$ActionName" -eq "h" -or "$ActionName" -eq "help") {
   exit 0
 }
 
-function ccInstall
-{
-    param ([string]$imageName)
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml pull
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml pull  
-    }
+$sleepSeconds = 60
+$fcount = (Get-ChildItem -Path compose/*/* -File -Filter  "docker-compose.yml" | Select-String "fullnode" | Measure-Object -Line).Lines
+if ($fcount -gt 5) {
+  $sleepSeconds = 300
 }
 
-function ccStart
-{
-    param ([string]$imageName)
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml up -d
-        Write-Host "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
-        Start-Sleep -Seconds 300
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml up -d  
+function ccInstall {
+  param ([string]$imageName)
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml pull
     }
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml pull  
+  }
 }
 
-function ccStop
-{
-    param ([string]$imageName)
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml stop
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml stop
+function ccStart {
+  param ([string]$imageName)
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml up -d
+      Write-Host "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
+      Start-Sleep -Seconds $sleepSeconds
     }
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml up -d  
+  }
+
+  Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
 }
 
-function ccReStart
-{
-    param ([string]$imageName)
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml restart
-        Write-Host "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
-        Start-Sleep -Seconds 300
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml restart 
+function ccStop {
+  param ([string]$imageName)
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml stop
     }
-}
-
-function ccUpgrade
-{
-    param ([string]$imageName)
-
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml stop
-        docker-compose -f compose/$f/docker-compose.yml rm -f
-        docker-compose -f compose/$f/docker-compose.yml pull
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-      docker-compose -f compose/$imageName/docker-compose.yml pull
-    }
-}
-
-function ccUpUp
-{
-    param ([string]$imageName)
-
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-        docker-compose -f compose/$f/docker-compose.yml stop
-        docker-compose -f compose/$f/docker-compose.yml rm -f
-        docker-compose -f compose/$f/docker-compose.yml pull
-        docker-compose -f compose/$f/docker-compose.yml up -d
-        Write-Host "sleeping 5 minutes for saving computer resources, and next fork will be processed 5 minutes later..."
-        Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
-        Start-Sleep -Seconds 300
-      }
-    } else {
-      docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-      docker-compose -f compose/$imageName/docker-compose.yml pull
-      docker-compose -f compose/$imageName/docker-compose.yml up -d
-    }
-}
-
-function ccUnInstall
-{
-    param ([string]$imageName)
-
-    if ($imageName -eq 'all') {
-      $files = Get-ChildItem "compose" -Attributes Directory
-      foreach ($f in $files) {
-        Write-Host "processing $($f) ..."
-		    docker-compose -f compose/$f/docker-compose.yml stop
-        docker-compose -f compose/$f/docker-compose.yml rm -f
-      }
-    } else {
-	    docker-compose -f compose/$imageName/docker-compose.yml stop
-      docker-compose -f compose/$imageName/docker-compose.yml rm -f
-    }
-}
-
-function ccMigrateDb
-{
-    param ([string]$migrateParams)
-    $imageName=$migrateParams.split(",")[0]
-    $folder=$migrateParams.split(",")[1]
-    $mainnetPath=''
-    if ($imageName -eq "chia") {
-      $mainnetPath="$HOME/.coctohug-$imageName/mainnet"
-    } elseif ($imageName -eq "silicoin") {
-      $mainnetPath="$HOME/.coctohug-$imageName/sit/mainnet"
-    } elseif ($imageName -eq "nchain") {
-      $mainnetPath="$HOME/.coctohug-$imageName/ext9"
-    } else {
-      $mainnetPath="$HOME/.coctohug-$imageName/$imageName/mainnet"
-    }
-
+  }
+  else {
     docker-compose -f compose/$imageName/docker-compose.yml stop
-    rm -r -fo $mainnetPath/db/*.*
-    robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
-    docker-compose -f compose/$imageName/docker-compose.yml up -d
+  }
 }
 
-function ccMigrateWallet
-{
+function ccReStart {
+  param ([string]$imageName)
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml restart
+      Write-Host "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
+      Start-Sleep -Seconds $sleepSeconds
+    }
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml restart 
+  }
+    
+  Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+}
+
+function ccUpgrade {
+  param ([string]$imageName)
+
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml stop
+      docker-compose -f compose/$f/docker-compose.yml rm -f
+      docker-compose -f compose/$f/docker-compose.yml pull
+    }
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+    docker-compose -f compose/$imageName/docker-compose.yml pull
+  }
+}
+
+function ccUpUp {
+  param ([string]$imageName)
+
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+      docker-compose -f compose/$f/docker-compose.yml stop
+      docker-compose -f compose/$f/docker-compose.yml rm -f
+      docker-compose -f compose/$f/docker-compose.yml pull
+      docker-compose -f compose/$f/docker-compose.yml up -d
+      Write-Host "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
+      Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
+      Start-Sleep -Seconds $sleepSeconds
+    }
+    Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+    docker-compose -f compose/$imageName/docker-compose.yml pull
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
+  }
+}
+
+function ccUnInstall {
+  param ([string]$imageName)
+
+  if ($imageName -eq 'all') {
+    $files = Get-ChildItem "compose" -Attributes Directory
+    foreach ($f in $files) {
+      Write-Host "processing $($f) ..."
+		    docker-compose -f compose/$f/docker-compose.yml stop
+      docker-compose -f compose/$f/docker-compose.yml rm -f
+    }
+  }
+  else {
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml rm -f
+  }
+}
+
+function ccMigrateDb {
   param ([string]$migrateParams)
-  $imageName=$migrateParams.split(",")[0]
-  $folder=$migrateParams.split(",")[1]
-  $mainnetPath=''
+  $imageName = $migrateParams.split(",")[0]
+  $folder = $migrateParams.split(",")[1]
+  $mainnetPath = ''
   if ($imageName -eq "chia") {
-    $mainnetPath="$HOME/.coctohug-$imageName/mainnet"
-  } elseif ($imageName -eq "silicoin") {
-    $mainnetPath="$HOME/.coctohug-$imageName/sit/mainnet"
-  } elseif ($imageName -eq "nchain") {
-    $mainnetPath="$HOME/.coctohug-$imageName/ext9"
-  } else {
-    $mainnetPath="$HOME/.coctohug-$imageName/$imageName/mainnet"
+    $mainnetPath = "$HOME/.coctohug-$imageName/mainnet"
+  }
+  elseif ($imageName -eq "silicoin") {
+    $mainnetPath = "$HOME/.coctohug-$imageName/sit/mainnet"
+  }
+  elseif ($imageName -eq "nchain") {
+    $mainnetPath = "$HOME/.coctohug-$imageName/ext9"
+  }
+  else {
+    $mainnetPath = "$HOME/.coctohug-$imageName/$imageName/mainnet"
+  }
+
+  docker-compose -f compose/$imageName/docker-compose.yml stop
+  rm -r -fo $mainnetPath/db/*.*
+  robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
+  docker-compose -f compose/$imageName/docker-compose.yml up -d
+}
+
+function ccMigrateWallet {
+  param ([string]$migrateParams)
+  $imageName = $migrateParams.split(",")[0]
+  $folder = $migrateParams.split(",")[1]
+  $mainnetPath = ''
+  if ($imageName -eq "chia") {
+    $mainnetPath = "$HOME/.coctohug-$imageName/mainnet"
+  }
+  elseif ($imageName -eq "silicoin") {
+    $mainnetPath = "$HOME/.coctohug-$imageName/sit/mainnet"
+  }
+  elseif ($imageName -eq "nchain") {
+    $mainnetPath = "$HOME/.coctohug-$imageName/ext9"
+  }
+  else {
+    $mainnetPath = "$HOME/.coctohug-$imageName/$imageName/mainnet"
   }
 
   docker-compose -f compose/$imageName/docker-compose.yml stop
@@ -220,117 +235,124 @@ function ccMigrateWallet
   docker-compose -f compose/$imageName/docker-compose.yml up -d
 }
 
-function ccImportKey
-{
-    keywords="$1"
-    # Write-Host "$keywords" > $HOME/.coctohug/mnc.txt
-    # Write-Host ""
-    # Write-Host "Imported. To use it, you may run 'ccm start flax' for flax fork"
+function ccImportKey {
+  keywords="$1"
+  # Write-Host "$keywords" > $HOME/.coctohug/mnc.txt
+  # Write-Host ""
+  # Write-Host "Imported. To use it, you may run 'ccm start flax' for flax fork"
 }
 
-function ccEmptyKey
-{
-    Write-Host '' > $HOME/.coctohug/mnc.txt
+function ccEmptyKey {
+  Write-Host '' > $HOME/.coctohug/mnc.txt
 }
 
-function ccVConnection
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName $imageName show -c
+function ccVConnection {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName $imageName show -c
 }
 
-function ccVChain
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName $imageName show -s
+function ccVChain {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName $imageName show -s
 }
 
-function ccVSummary
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName $imageName farm summary
+function ccVSummary {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName $imageName farm summary
 }
 
-function ccVWallet
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName $imageName wallet show
+function ccVWallet {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName $imageName wallet show
 }
 
-function ccVKey
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName $imageName keys show
+function ccVKey {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName $imageName keys show
 }
 
-function ccVLog
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
+function ccVLog {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
 }
 
-function ccDocker
-{
-    param ([string]$imageName)
-    docker exec -it coctohug-$imageName /bin/bash
+function ccDocker {
+  param ([string]$imageName)
+  docker exec -it coctohug-$imageName /bin/bash
 }
 
-function ccClean
-{
-    docker image prune -a
+function ccClean {
+  docker image prune -a
 }
 
-function ccContainer
-{
-    docker ps -a
+function ccContainer {
+  docker ps -a
 }
 
-function ccImage
-{
-    docker images
+function ccImage {
+  docker images
 }
 
 if ($ActionName -eq 'install') {
   ccInstall $ActionParameter
-} elseif ($ActionName -eq 'start') {
+}
+elseif ($ActionName -eq 'start') {
   ccStart $ActionParameter
-} elseif ($ActionName -eq 'stop') {
+}
+elseif ($ActionName -eq 'stop') {
   ccStop $ActionParameter
-} elseif ($ActionName -eq 'restart') {
+}
+elseif ($ActionName -eq 'restart') {
   ccReStart $ActionParameter
-} elseif ($ActionName -eq 'upgrade') {
+}
+elseif ($ActionName -eq 'upgrade') {
   ccUpgrade $ActionParameter
-} elseif ($ActionName -eq 'upup') {
+}
+elseif ($ActionName -eq 'upup') {
   ccUpUp $ActionParameter
-} elseif ($ActionName -eq 'uninstall') {
+}
+elseif ($ActionName -eq 'uninstall') {
   ccUnInstall $ActionParameter
-} elseif ($ActionName -eq 'migrate-db') {
+}
+elseif ($ActionName -eq 'migrate-db') {
   ccMigrateDb $ActionParameter
-} elseif ($ActionName -eq 'migrate-wallet') {
+}
+elseif ($ActionName -eq 'migrate-wallet') {
   ccMigrateWallet $ActionParameter
-# } elseif ($ActionName -eq 'import-key') {
-#   ccImportKey $ActionParameter
-} elseif ($ActionName -eq 'empty-key') {
+  # } elseif ($ActionName -eq 'import-key') {
+  #   ccImportKey $ActionParameter
+}
+elseif ($ActionName -eq 'empty-key') {
   ccEmptyKey $ActionParameter
-} elseif ($ActionName -eq 'vconnection') {
+}
+elseif ($ActionName -eq 'vconnection') {
   ccVConnection $ActionParameter
-} elseif ($ActionName -eq 'vchain') {
+}
+elseif ($ActionName -eq 'vchain') {
   ccVChain $ActionParameter
-} elseif ($ActionName -eq 'vsummary') {
+}
+elseif ($ActionName -eq 'vsummary') {
   ccVSummary $ActionParameter
-} elseif ($ActionName -eq 'vwallet') {
+}
+elseif ($ActionName -eq 'vwallet') {
   ccVWallet $ActionParameter
-} elseif ($ActionName -eq 'vkey') {
+}
+elseif ($ActionName -eq 'vkey') {
   ccVKey $ActionParameter
-} elseif ($ActionName -eq 'vlog') {
+}
+elseif ($ActionName -eq 'vlog') {
   ccVLog $ActionParameter
-} elseif ($ActionName -eq 'docker') {
+}
+elseif ($ActionName -eq 'docker') {
   ccDocker $ActionParameter
-} elseif ($ActionName -eq 'clean') {
+}
+elseif ($ActionName -eq 'clean') {
   ccClean $ActionParameter
-} elseif ($ActionName -eq 'container') {
+}
+elseif ($ActionName -eq 'container') {
   ccContainer $ActionParameter
-} elseif ($ActionName -eq 'image') {
+}
+elseif ($ActionName -eq 'image') {
   ccImage $ActionParameter
 }
 

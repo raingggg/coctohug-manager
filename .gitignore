@@ -1,5 +1,6 @@
 node_modules
 gui/node_modules
+compose
 
 *.log
 
