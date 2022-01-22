@@ -60,6 +60,8 @@ if ($fcount -gt 5) {
   $sleepSeconds = 300
 }
 
+$controllerIP = (Get-ChildItem -Path compose/*/* -File -Filter  "docker-compose.yml" | Select-String "controller_address=(.*)" | select -first 1 | Select-String "controller_address=(.*)").matches.groups[1].value
+
 function ccInstall {
   param ([string]$imageName)
   if ($imageName -eq 'all') {
@@ -89,8 +91,9 @@ function ccStart {
   else {
     docker-compose -f compose/$imageName/docker-compose.yml up -d  
   }
-
-  Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  
+  try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
+  Write-Host "Done. Please open browser with url http://$($controllerIP):12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccStop {
@@ -122,8 +125,9 @@ function ccReStart {
   else {
     docker-compose -f compose/$imageName/docker-compose.yml restart 
   }
-    
-  Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  
+  try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
+  Write-Host "Done. Please open browser with url http://$($controllerIP):12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccUpgrade {
@@ -160,7 +164,6 @@ function ccUpUp {
       Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
       Start-Sleep -Seconds $sleepSeconds
     }
-    Write-Host "Done. Please open browser with url http://localhost:12630 to watch the forks status"
   }
   else {
     docker-compose -f compose/$imageName/docker-compose.yml stop
@@ -168,6 +171,9 @@ function ccUpUp {
     docker-compose -f compose/$imageName/docker-compose.yml pull
     docker-compose -f compose/$imageName/docker-compose.yml up -d
   }
+  
+  try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
+  Write-Host "Done. Please open browser with url http://$($controllerIP):12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccUnInstall {
@@ -209,6 +215,9 @@ function ccMigrateDb {
   rm -r -fo $mainnetPath/db/*.*
   robocopy $folder $mainnetPath/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
   docker-compose -f compose/$imageName/docker-compose.yml up -d
+  
+  try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
+  Write-Host "Done. Please open browser with url http://$($controllerIP):12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccMigrateWallet {
@@ -233,6 +242,9 @@ function ccMigrateWallet {
   rm -r -fo $mainnetPath/wallet/db/*.*
   robocopy $folder $mainnetPath/wallet/db *.* /r:3 /w:10 /mt:1 /njh /njs /ndl /nc /ns
   docker-compose -f compose/$imageName/docker-compose.yml up -d
+  
+  try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
+  Write-Host "Done. Please open browser with url http://$($controllerIP):12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccImportKey {

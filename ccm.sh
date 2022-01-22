@@ -59,6 +59,7 @@ fcount=$(grep -r 'fullnode' compose/*/docker-compose.yml | wc -l)
 if [[ $fcount -gt 5 ]]; then
   sleepSeconds=300
 fi
+controllerIP=$(grep -o -m 1 'controller_address=.*' compose/*/docker-compose.yml | head -1 | sed 's/^.*controller_address=\(.*\)$/\1/g')
 
 function ccInstall {
   imageName=$1
@@ -86,7 +87,8 @@ function ccStart {
     docker-compose -f compose/$imageName/docker-compose.yml up -d
   fi
 
-  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb
+  echo "Done. Please open browser with url http://${controllerIP}:12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccStop {
@@ -115,7 +117,8 @@ function ccReStart {
     docker-compose -f compose/$imageName/docker-compose.yml restart
   fi
 
-  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb
+  echo "Done. Please open browser with url http://${controllerIP}:12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccUpgrade {
@@ -154,7 +157,8 @@ function ccUpUp {
     docker-compose -f compose/$imageName/docker-compose.yml up -d
   fi
 
-  echo "Done. Please open browser with url http://localhost:12630 to watch the forks status"
+  curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb
+  echo "Done. Please open browser with url http://${controllerIP}:12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccUnInstall {
@@ -189,6 +193,9 @@ function ccMigrateDb {
   rm -fr $mainnetPath/db/*.*
   cp -r $folder/*.* $mainnetPath/db/
   docker-compose -f compose/$imageName/docker-compose.yml up -d
+
+  curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb
+  echo "Done. Please open browser with url http://${controllerIP}:12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccMigrateWallet {
@@ -209,6 +216,9 @@ function ccMigrateWallet {
   rm -fr $mainnetPath/wallet/db/*.*
   cp -r $folder/*.* $mainnetPath/wallet/db/
   docker-compose -f compose/$imageName/docker-compose.yml up -d
+
+  curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb
+  echo "Done. Please open browser with url http://${controllerIP}:12630 to watch the forks status - it might need around 30 minutes to fully load fork status"
 }
 
 function ccImportKey {
