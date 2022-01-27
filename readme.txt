@@ -11,7 +11,10 @@
 - stop one fork such as flora: ccm stop flora
 - restart one fork such as flora: ccm restart flora
 - upgrade one fork such as flora: ccm upgrade flora
+- upgrade then start one fork such as flora: ccm upup flora
 - uninstall one fork such as flora: ccm uninstall flora
+- migrate one fork db such as flora: ccm migrate-db "flora,/home/username/.flora/mainnet/db"
+- migrate one fork wallet-db such as flora: ccm migrate-wallet "flora,/home/username/.flora/mainnet/wallet/db"
 
 # quick commands for all forks
 - install all forks: ccm install all
@@ -19,6 +22,7 @@
 - stop all forks: ccm stop all
 - restart all forks: ccm restart all
 - upgrade all forks: ccm upgrade all
+- upgrade then start all forks: ccm upup all
 - uninstall all forks: ccm uninstall all
 
 # view detailed fork status
