@@ -236,60 +236,66 @@ function ccEmptyKey {
 
 function ccVConnection {
   imageName=$1
+  binName=$1
   if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
-	imageName="chia"
+	binName="chia"
   elif [[ "$1" == "silicoin" ]]; then
-	imageName="sit"
+	binName="sit"
   fi
-  docker exec -it coctohug-$imageName $imageName show -c
+  docker exec -it coctohug-$imageName $binName show -c
 }
 
 function ccVChain {
   imageName=$1
+  binName=$1
   if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
-	imageName="chia"
+	binName="chia"
   elif [[ "$1" == "silicoin" ]]; then
-	imageName="sit"
+	binName="sit"
   fi
-  docker exec -it coctohug-$imageName $imageName show -s
+  docker exec -it coctohug-$imageName $binName show -s
 }
 
 function ccVSummary {
   imageName=$1
+  binName=$1
   if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
-	imageName="chia"
+	binName="chia"
   elif [[ "$1" == "silicoin" ]]; then
-	imageName="sit"
+	binName="sit"
   fi
-  docker exec -it coctohug-$imageName $imageName farm summary
+  docker exec -it coctohug-$imageName $binName farm summary
 }
 
 function ccVWallet {
   imageName=$1
+  binName=$1
   if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
-	imageName="chia"
+	binName="chia"
   elif [[ "$1" == "silicoin" ]]; then
-	imageName="sit"
+	binName="sit"
   fi
-  docker exec -it coctohug-$imageName $imageName wallet show
+  docker exec -it coctohug-$imageName $binName wallet show
 }
 
 function ccVKey {
   imageName=$1
+  binName=$1
   if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
-	imageName="chia"
+	binName="chia"
   elif [[ "$1" == "silicoin" ]]; then
-	imageName="sit"
+	binName="sit"
   fi
-  docker exec -it coctohug-$imageName $imageName keys show
+  docker exec -it coctohug-$imageName $binName keys show
 }
 
 function ccVLog {
   imageName=$1
+  pathName=$1
   if [[ "$1" == "silicoin" ]]; then
-	imageName=sit
+	pathName=sit
   fi
-  docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
+  docker exec -it coctohug-$imageName tail -f /root/.$pathName/mainnet/log/debug.log
 }
 
 function ccDocker {
