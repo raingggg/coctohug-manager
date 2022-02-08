@@ -236,31 +236,59 @@ function ccEmptyKey {
 
 function ccVConnection {
   imageName=$1
+  if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
+	imageName="chia"
+  elif [[ "$1" == "silicoin" ]]; then
+	imageName="sit"
+  fi
   docker exec -it coctohug-$imageName $imageName show -c
 }
 
 function ccVChain {
   imageName=$1
+  if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
+	imageName="chia"
+  elif [[ "$1" == "silicoin" ]]; then
+	imageName="sit"
+  fi
   docker exec -it coctohug-$imageName $imageName show -s
 }
 
 function ccVSummary {
   imageName=$1
+  if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
+	imageName="chia"
+  elif [[ "$1" == "silicoin" ]]; then
+	imageName="sit"
+  fi
   docker exec -it coctohug-$imageName $imageName farm summary
 }
 
 function ccVWallet {
   imageName=$1
+  if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
+	imageName="chia"
+  elif [[ "$1" == "silicoin" ]]; then
+	imageName="sit"
+  fi
   docker exec -it coctohug-$imageName $imageName wallet show
 }
 
 function ccVKey {
   imageName=$1
+  if [[ "$1" == "nchain" || "$1" == "rose" ]]; then
+	imageName="chia"
+  elif [[ "$1" == "silicoin" ]]; then
+	imageName="sit"
+  fi
   docker exec -it coctohug-$imageName $imageName keys show
 }
 
 function ccVLog {
   imageName=$1
+  if [[ "$1" == "silicoin" ]]; then
+	imageName=sit
+  fi
   docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
 }
 

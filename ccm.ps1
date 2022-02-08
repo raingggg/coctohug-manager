@@ -261,32 +261,71 @@ function ccEmptyKey {
 }
 
 function ccVConnection {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "nchain" -or $1 -eq "rose") {
+    $imageName="chia"
+  }
+  elseif ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName $imageName show -c
 }
 
 function ccVChain {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "nchain" -or $1 -eq "rose") {
+    $imageName="chia"
+  }
+  elseif ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName $imageName show -s
 }
 
 function ccVSummary {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "nchain" -or $1 -eq "rose") {
+    $imageName="chia"
+  }
+  elseif ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName $imageName farm summary
 }
 
 function ccVWallet {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "nchain" -or $1 -eq "rose") {
+    $imageName="chia"
+  }
+  elseif ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName $imageName wallet show
 }
 
 function ccVKey {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "nchain" -or $1 -eq "rose") {
+    $imageName="chia"
+  }
+  elseif ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName $imageName keys show
 }
 
 function ccVLog {
-  param ([string]$imageName)
+  param ([string]$1)
+  $imageName=$1
+  if ($1 -eq "silicoin") {
+    $imageName="sit"
+  }
   docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
 }
 
