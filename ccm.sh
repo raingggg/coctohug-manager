@@ -108,13 +108,15 @@ function ccReStart {
   if [[ $imageName == "all" ]]; then
     for f in compose/*; do
       echo "processing $f ..."
-      docker-compose -f $f/docker-compose.yml restart
+      docker-compose -f $f/docker-compose.yml stop
+      docker-compose -f $f/docker-compose.yml up -d
       echo "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
       echo $(date +"%Y-%m-%d %T")
       sleep ${sleepSeconds}s
     done
   else
-    docker-compose -f compose/$imageName/docker-compose.yml restart
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
   fi
 
   curl --silent --output /dev/null http://${controllerIP}:12630/reviewWeb

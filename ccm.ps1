@@ -116,14 +116,16 @@ function ccReStart {
     $files = Get-ChildItem "compose" -Attributes Directory
     foreach ($f in $files) {
       Write-Host "processing $($f) ..."
-      docker-compose -f compose/$f/docker-compose.yml restart
+      docker-compose -f compose/$f/docker-compose.yml stop
+      docker-compose -f compose/$f/docker-compose.yml up -d
       Write-Host "sleeping $sleepSeconds seconds for saving computer resources, and next fork will be processed $sleepSeconds seconds later..."
       Write-Host $(Get-Date -format "yyyy-MM-dd HH:mm:ss")
       Start-Sleep -Seconds $sleepSeconds
     }
   }
   else {
-    docker-compose -f compose/$imageName/docker-compose.yml restart 
+    docker-compose -f compose/$imageName/docker-compose.yml stop
+    docker-compose -f compose/$imageName/docker-compose.yml up -d
   }
   
   try { $ProgressPreference = 'SilentlyContinue'; (Invoke-WebRequest -Uri "http://$($controllerIP):12630/reviewWeb") | out-null; $ProgressPreference = 'Continue' } catch {}
