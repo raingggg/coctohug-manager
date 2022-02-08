@@ -262,71 +262,77 @@ function ccEmptyKey {
 
 function ccVConnection {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $binName = $1
   if ($1 -eq "nchain" -or $1 -eq "rose") {
-    $imageName="chia"
+    $binName = "chia"
   }
   elseif ($1 -eq "silicoin") {
-    $imageName="sit"
+    $binName = "sit"
   }
-  docker exec -it coctohug-$imageName $imageName show -c
+  docker exec -it coctohug-$imageName $binName show -c
 }
 
 function ccVChain {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $binName = $1
   if ($1 -eq "nchain" -or $1 -eq "rose") {
-    $imageName="chia"
+    $binName = "chia"
   }
   elseif ($1 -eq "silicoin") {
-    $imageName="sit"
+    $binName = "sit"
   }
-  docker exec -it coctohug-$imageName $imageName show -s
+  docker exec -it coctohug-$imageName $binName show -s
 }
 
 function ccVSummary {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $binName = $1
   if ($1 -eq "nchain" -or $1 -eq "rose") {
-    $imageName="chia"
+    $binName = "chia"
   }
   elseif ($1 -eq "silicoin") {
-    $imageName="sit"
+    $binName = "sit"
   }
-  docker exec -it coctohug-$imageName $imageName farm summary
+  docker exec -it coctohug-$imageName $binName farm summary
 }
 
 function ccVWallet {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $binName = $1
   if ($1 -eq "nchain" -or $1 -eq "rose") {
-    $imageName="chia"
+    $binName = "chia"
   }
   elseif ($1 -eq "silicoin") {
-    $imageName="sit"
+    $binName = "sit"
   }
-  docker exec -it coctohug-$imageName $imageName wallet show
+  docker exec -it coctohug-$imageName $binName wallet show
 }
 
 function ccVKey {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $binName = $1
   if ($1 -eq "nchain" -or $1 -eq "rose") {
-    $imageName="chia"
+    $binName = "chia"
   }
   elseif ($1 -eq "silicoin") {
-    $imageName="sit"
+    $binName = "sit"
   }
-  docker exec -it coctohug-$imageName $imageName keys show
+  docker exec -it coctohug-$imageName $binName keys show
 }
 
 function ccVLog {
   param ([string]$1)
-  $imageName=$1
+  $imageName = $1
+  $pathName = $1
   if ($1 -eq "silicoin") {
-    $imageName="sit"
+    $pathName = "sit"
   }
-  docker exec -it coctohug-$imageName tail -f /root/.$imageName/mainnet/log/debug.log
+  docker exec -it coctohug-$imageName tail -f /root/.$pathName/mainnet/log/debug.log
 }
 
 function ccDocker {
