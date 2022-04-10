@@ -332,7 +332,13 @@ function ccVLog {
   if ($1 -eq "silicoin") {
     $pathName = "sit"
   }
-  docker exec -it coctohug-$imageName tail -f /root/.$pathName/mainnet/log/debug.log
+
+  $logName = "/root/.$pathName/mainnet/log/debug.log"
+  if ($1 -eq "chinilla") {
+    $logName = "/root/.$pathName/vanillanet/log/debug.log"
+  }
+
+  docker exec -it coctohug-$imageName tail -f $logName
 }
 
 function ccDocker {
